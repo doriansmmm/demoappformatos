@@ -1,0 +1,258 @@
+Screen_Detalle_Herra_Equip_Visit As screen:
+    BackgroundImage: =PantallaCel3
+    ImagePosition: =ImagePosition.Stretch
+    OnVisible: =
+
+    Image1_8 As image:
+        Height: =If(Screen_Detalle_Herra_Equip_Visit.Size > 2, 150, 100)
+        Image: =Imagen1_1
+        ImagePosition: =ImagePosition.Stretch
+        Width: =Parent.Width
+        X: =Parent.Width/2-Image1_8.Width/2
+        ZIndex: =1
+
+    Button1_6 As button:
+        DisplayMode: =DisplayMode.View
+        Fill: =RGBA(235, 38, 44, 1)
+        Height: =50
+        Size: =If(Screen_Detalle_Herra_Equip_Visit.Size > 2, 20, 15)
+        Text: ="Registro de herramienta/equipo"
+        Width: =1366
+        Y: =Image1_8.Y+Image1_8.Height-Button1_6.Height
+        ZIndex: =2
+
+    Container5_4 As groupContainer.horizontalAutoLayoutContainer:
+        BorderColor: =RGBA(255, 0, 0, 1)
+        Height: =Parent.Height-Image1_8.Height-Image7_10.Height
+        LayoutDirection: =If(Screen_Detalle_Herra_Equip_Visit.Size > 2, LayoutDirection.Horizontal, LayoutDirection.Vertical)
+        LayoutMode: =LayoutMode.Auto
+        LayoutOverflowY: =LayoutOverflow.Scroll
+        PaddingBottom: =2
+        PaddingLeft: =2
+        PaddingRight: =2
+        PaddingTop: =2
+        Width: =If(Screen_Detalle_Herra_Equip_Visit.Size > 2, Parent.Width-Icon1_11.Width*2, Parent.Width-10)
+        X: =Parent.Width/2-Self.Width/2
+        Y: =Image7_10.Y+Image7_10.Height
+        ZIndex: =45
+
+        Container8_3 As groupContainer.verticalAutoLayoutContainer:
+            BorderColor: =RGBA(39, 67, 125, 1)
+            BorderThickness: =2
+            Height: =Container11_3.Height+Label15_2.Height+Container11_7.Height+Container11_17.Height+Container11_15.Height+Container11_16.Height-Container11_17.Height+Image17.Height*2
+            LayoutAlignItems: =LayoutAlignItems.Stretch
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutMinHeight: =Container11_3.Height+Label15_2.Height+Container11_7.Height+Container11_17.Height+Container11_15.Height+Container11_16.Height-Container11_17.Height+Image17.Height*2
+            LayoutMinWidth: =0
+            LayoutMode: =LayoutMode.Auto
+            PaddingLeft: =5
+            PaddingRight: =5
+            X: =121
+            Y: =258
+            ZIndex: =1
+
+            Container11_3 As groupContainer.horizontalAutoLayoutContainer:
+                AlignInContainer: =AlignInContainer.SetByContainer
+                FillPortions: =0
+                Height: =40
+                LayoutMinHeight: =100
+                LayoutMinWidth: =0
+                LayoutMode: =LayoutMode.Auto
+                ZIndex: =1
+
+                Label13_3 As label:
+                    FillPortions: =1
+                    LayoutMinWidth: =0
+                    Size: =If(Screen_Detalle_Herra_Equip_Visit.Size > 2, 13, 9)
+                    Text: ="Tipo de usuario"
+                    ZIndex: =1
+
+                Label14_3 As label:
+                    Align: =Align.Center
+                    BorderThickness: =1
+                    Fill: =RGBA(186, 202, 226, 1)
+                    FillPortions: =1
+                    FontWeight: =FontWeight.Bold
+                    LayoutMinWidth: =0
+                    Text: ="Visitante"
+                    ZIndex: =2
+
+            Label15_2 As label:
+                Align: =Align.Center
+                FontWeight: =FontWeight.Semibold
+                LayoutMinWidth: =0
+                Text: =Upper(varRegistroSelectVisit.Nombre)
+                ZIndex: =2
+
+            Container11_7 As groupContainer.horizontalAutoLayoutContainer:
+                AlignInContainer: =AlignInContainer.SetByContainer
+                FillPortions: =0
+                Height: =40
+                LayoutMinHeight: =100
+                LayoutMinWidth: =0
+                LayoutMode: =LayoutMode.Auto
+                ZIndex: =3
+
+                Label13_7 As label:
+                    Align: =Align.Right
+                    FillPortions: =1
+                    LayoutMinWidth: =0
+                    Text: |-
+                        ="Persona que visita:"
+                    ZIndex: =1
+
+                Label14_7 As label:
+                    FillPortions: =1
+                    FontWeight: =FontWeight.Bold
+                    LayoutMinWidth: =0
+                    Text: =varRegistroSelectVisit.PersonaVisita
+                    ZIndex: =2
+
+            Container11_15 As groupContainer.horizontalAutoLayoutContainer:
+                AlignInContainer: =AlignInContainer.SetByContainer
+                FillPortions: =0
+                Height: =40
+                LayoutMinHeight: =100
+                LayoutMinWidth: =0
+                LayoutMode: =LayoutMode.Auto
+                ZIndex: =6
+
+                Label13_15 As label:
+                    Align: =Align.Right
+                    FillPortions: =1
+                    LayoutMinWidth: =0
+                    Text: |-
+                        ="Vehículo:"
+                    ZIndex: =1
+
+                Label14_15 As label:
+                    FillPortions: =1
+                    FontWeight: =FontWeight.Bold
+                    LayoutMinWidth: =0
+                    Text: =varRegistroSelectVisit.MarcaVehiculo
+                    ZIndex: =2
+
+            Container11_16 As groupContainer.horizontalAutoLayoutContainer:
+                AlignInContainer: =AlignInContainer.SetByContainer
+                FillPortions: =0
+                Height: =40
+                LayoutMinHeight: =100
+                LayoutMinWidth: =0
+                LayoutMode: =LayoutMode.Auto
+                ZIndex: =7
+
+                Label13_16 As label:
+                    Align: =Align.Right
+                    FillPortions: =1
+                    LayoutMinWidth: =0
+                    Text: |-
+                        ="Placa:"
+                    ZIndex: =1
+
+                Label14_16 As label:
+                    FillPortions: =1
+                    FontWeight: =FontWeight.Bold
+                    LayoutMinWidth: =0
+                    Text: =varRegistroSelectVisit.Placas
+                    ZIndex: =2
+
+            Container11_17 As groupContainer.horizontalAutoLayoutContainer:
+                AlignInContainer: =AlignInContainer.SetByContainer
+                FillPortions: =0
+                Height: =40
+                LayoutMinHeight: =100
+                LayoutMinWidth: =0
+                LayoutMode: =LayoutMode.Auto
+                ZIndex: =8
+
+                Label13_17 As label:
+                    Align: =Align.Right
+                    FillPortions: =1
+                    LayoutMinWidth: =0
+                    Text: |-
+                        ="Vigencia:"
+                    ZIndex: =1
+
+                Label14_17 As label:
+                    FillPortions: =1
+                    FontWeight: =FontWeight.Bold
+                    LayoutMinWidth: =0
+                    Text: =varRegistroSelectVisit.FechaInicio & " - " & varRegistroSelectVisit.FechaFin
+                    ZIndex: =2
+
+            Image17 As image:
+                Image: =Substitute( varRegistroSelectVisit.Firma,Char(34),"")
+                ZIndex: =9
+
+        Container9_3 As groupContainer.verticalAutoLayoutContainer:
+            LayoutAlignItems: =LayoutAlignItems.Center
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutMinHeight: =200
+            LayoutMinWidth: =0
+            LayoutMode: =LayoutMode.Auto
+            X: =703
+            Y: =279
+            ZIndex: =2
+
+            Image10_2 As image:
+                Height: =150
+                Image: =BotónRegistroHyE_1
+                OnSelect: =Navigate(Screen_Registro_Herra_Equip_Visit, ScreenTransition.Cover)
+                Width: =150
+                ZIndex: =1
+
+    Group7_4 As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =46
+
+        Image7_11 As image:
+            Height: =If(Screen_Index.Size > 2, 50, 40)
+            Image: =BotónHome
+            Width: =If(Screen_Index.Size > 2, 50, 40)
+            X: =Parent.Width-Image7_11.Width
+            Y: =Image1_8.Y+Image1_8.Height
+            ZIndex: =27
+
+        Icon1_11 As icon.Cancel:
+            Color: =RGBA(0, 0, 0, 0)
+            Height: =Image7_11.Height
+            Icon: =Icon.Cancel
+            OnSelect: =Navigate(Screen_Index,ScreenTransition.Cover)
+            Width: =Image7_11.Width
+            X: =Image7_11.X
+            Y: =Image7_11.Y
+            ZIndex: =28
+
+    Label11_1 As label:
+        Text: ="Texto"
+        X: =40
+        Y: =40
+        ZIndex: =48
+
+    Group7_5 As group:
+        Height: =5
+        Width: =5
+        X: =1286
+        Y: =688
+        ZIndex: =48
+
+        Image7_10 As image:
+            Height: =If(Screen_Index.Size > 2, 50, 40)
+            Image: =BotónAtrás
+            Width: =If(Screen_Index.Size > 2, 50, 40)
+            Y: =Image1_8.Y+Image1_8.Height
+            ZIndex: =46
+
+        Icon1_10 As icon.Cancel:
+            Color: =RGBA(0, 0, 0, 0)
+            Height: =Image7_10.Height
+            Icon: =Icon.Cancel
+            OnSelect: =Navigate(Screen_Busqueda_Herra_Equip,ScreenTransition.Cover)
+            Width: =Image7_10.Width
+            X: =Image7_10.X
+            Y: =Image7_10.Y
+            ZIndex: =47
+

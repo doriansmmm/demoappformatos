@@ -1,0 +1,804 @@
+Screen_Registro_Herra_Equip_Visit As screen:
+    BackgroundImage: =PantallaCel3
+    ImagePosition: =ImagePosition.Stretch
+    OnVisible: |-
+        =/*
+        ClearCollect(colHerraEquip; {});;
+        Remove(colHerraEquip; First(colHerraEquip));;
+        */
+        Refresh(RegIngreHerraEquipoVisit);
+        Set(colRegIngreHerraEquipoVis, First(Filter(RegIngreHerraEquipoVisit, IdRegIngreVisitas=varRegistroSelectVisit.ID && Salida="0")));
+        
+        Refresh(HerraEquipoVisit);
+        ClearCollect(colHerraEquipovist, Filter(HerraEquipoVisit, Title=Text(colRegIngreHerraEquipoVis.ID)));
+        
+        
+        Reset(txtObservaciones_1);
+        Reset(PenInput1_2);
+
+    Label48_1 As label:
+        Align: =Align.Center
+        FontWeight: =FontWeight.Bold
+        Text: ="No hay Herramienta registrada"
+        Visible: =false//CountRows(colHerraEquipo) = 0
+        Width: =Parent.Width
+        Y: =Parent.Height/2-Self.Height/2
+        ZIndex: =1
+
+    Image1_7 As image:
+        Height: =If(Screen_Registro_Herra_Equip_Visit.Size > 2, 150, 100)
+        Image: =Imagen1_1
+        ImagePosition: =ImagePosition.Stretch
+        Width: =Parent.Width
+        X: =Parent.Width/2-Image1_7.Width/2
+        ZIndex: =4
+
+    Button1_8 As button:
+        DisplayMode: =DisplayMode.View
+        Fill: =RGBA(235, 38, 44, 1)
+        Height: =60
+        Size: =If(Screen_Registro_Herra_Equip_Visit.Size > 2, 30, 15)
+        Text: ="Registro de herramienta/equipo"
+        Width: =Parent.Width
+        Y: =Image1_7.Y+Image1_7.Height-Button1_8.Height
+        ZIndex: =5
+
+    Container5_3 As groupContainer.horizontalAutoLayoutContainer:
+        Height: =Parent.Height-Image1_7.Height-Label18_1.Height-Image7_8.Height
+        LayoutDirection: =If(Screen_Registro_Herra_Equip_Visit.Size > 2, LayoutDirection.Horizontal, LayoutDirection.Vertical)
+        LayoutGap: =10
+        LayoutMode: =LayoutMode.Auto
+        LayoutOverflowY: =LayoutOverflow.Scroll
+        PaddingLeft: =10
+        PaddingTop: =10
+        Visible: =true//CountRows(colHerraEquipo) > 0
+        Width: =If(Screen_Registro_Herra_Equip_Visit.Size > 2, Parent.Width-Icon1_9.Width*2, Parent.Width-20)
+        X: =Parent.Width/2-Self.Width/2
+        Y: =Image7_8.Y+Image7_8.Height
+        ZIndex: =8
+
+        "Gallery2_1 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Items: =colHerraEquipovist
+            Layout: =Layout.Vertical
+            LayoutMinHeight: =287
+            LayoutMinWidth: =0
+            TemplatePadding: =0
+            TemplateSize: =Min(160, Self.Height - 60)
+            ZIndex: =1
+
+            Title1_11 As label:
+                Height: =30
+                OnSelect: =Select(Parent)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =13
+                Text: |-
+                    ="Herramienta:"
+                VerticalAlign: =VerticalAlign.Top
+                Width: =120
+                X: =5
+                ZIndex: =2
+
+            Separator1_2 As rectangle:
+                BorderColor: =RGBA(0, 0, 0, 0)
+                Fill: =RGBA(0, 0, 0, 1)
+                Height: =1
+                OnSelect: =Select(Parent)
+                Width: =Parent.TemplateWidth
+                Y: =Parent.TemplateHeight - 1
+                ZIndex: =5
+
+            Title1_13 As label:
+                Height: =30
+                OnSelect: =Select(Parent)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =13
+                Text: |-
+                    ="Cantidad:"
+                VerticalAlign: =VerticalAlign.Top
+                Width: =120
+                X: =5
+                Y: =Title1_11.Y+Title1_11.Height
+                ZIndex: =6
+
+            Title1_15 As label:
+                Height: =30
+                OnSelect: =Select(Parent)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =13
+                Text: ="Marca"
+                VerticalAlign: =VerticalAlign.Top
+                Width: =120
+                X: =5
+                Y: =Title1_13.Y+Title1_13.Height
+                ZIndex: =7
+
+            Title1_17 As label:
+                Height: =30
+                OnSelect: =Select(Parent)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =13
+                Text: |-
+                    ="Modelo:"
+                VerticalAlign: =VerticalAlign.Top
+                Width: =120
+                X: =5
+                Y: =Title1_15.Y+Title1_15.Height
+                ZIndex: =8
+
+            Title1_19 As label:
+                Height: =30
+                OnSelect: =Select(Parent)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =13
+                Text: |-
+                    ="Serie:"
+                VerticalAlign: =VerticalAlign.Top
+                Width: =120
+                X: =5
+                Y: =Title1_17.Y+Title1_17.Height
+                ZIndex: =9
+
+            Title1_12 As label:
+                FontWeight: =FontWeight.Normal
+                Height: =30
+                OnSelect: =Select(Parent)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =13
+                Text: =ThisItem.EquipoHerramienta
+                VerticalAlign: =VerticalAlign.Top
+                Width: =Parent.TemplateWidth-Title1_11.Width-5
+                X: =Title1_11.X+Title1_11.Width
+                Y: =Title1_11.Y
+                ZIndex: =10
+
+            Title1_14 As label:
+                FontWeight: =FontWeight.Normal
+                Height: =30
+                OnSelect: =Select(Parent)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =13
+                Text: =ThisItem.Cantidad
+                VerticalAlign: =VerticalAlign.Top
+                Width: =Parent.TemplateWidth-Title1_13.Width-5
+                X: =Title1_13.X+Title1_13.Width
+                Y: =Title1_13.Y
+                ZIndex: =11
+
+            Title1_16 As label:
+                FontWeight: =FontWeight.Normal
+                Height: =30
+                OnSelect: =Select(Parent)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =13
+                Text: =ThisItem.Marca
+                VerticalAlign: =VerticalAlign.Top
+                Width: =Parent.TemplateWidth-Title1_15.Width-5
+                X: =Title1_15.X+Title1_15.Width
+                Y: =Title1_15.Y
+                ZIndex: =12
+
+            Title1_18 As label:
+                FontWeight: =FontWeight.Normal
+                Height: =30
+                OnSelect: =Select(Parent)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =13
+                Text: =ThisItem.Modelo
+                VerticalAlign: =VerticalAlign.Top
+                Width: =Parent.TemplateWidth-Title1_17.Width-5
+                X: =Title1_17.X+Title1_17.Width
+                Y: =Title1_17.Y
+                ZIndex: =13
+
+            Title1_20 As label:
+                FontWeight: =FontWeight.Normal
+                Height: =30
+                OnSelect: =Select(Parent)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =13
+                Text: =ThisItem.Serie
+                VerticalAlign: =VerticalAlign.Top
+                Width: =Parent.TemplateWidth-Title1_19.Width-5
+                X: =Title1_19.X+Title1_19.Width
+                Y: =Title1_19.Y
+                ZIndex: =14
+
+            Icon2_1 As icon.Edit:
+                Color: =RGBA(0, 0, 0, 1)
+                Height: =If(Screen_Registro_Herra_Equip_Visit.Size > 2, 40, 35)
+                Icon: =Icon.Edit
+                OnSelect: |-
+                    =Set(varItemsSelect, ThisItem);
+                    Set(_bandEditHerrEquip, true);
+                Visible: =If(ThisItem.Registrada, false, true)
+                Width: =If(Screen_Registro_Herra_Equip_Visit.Size > 2, 40, 35)
+                X: =Icon5_1.X-Self.Width-10
+                ZIndex: =15
+
+            Icon5_1 As icon.Trash:
+                Color: =RGBA(0, 0, 0, 1)
+                Height: =If(Screen_Registro_Herra_Equip_Visit.Size > 2, 40, 35)
+                Icon: =Icon.Trash
+                OnSelect: |-
+                    =Set(varItemsSelect, ThisItem);
+                    Set(_bandEliminarHerrEquip, true);
+                Visible: =If(ThisItem.Registrada, false, true)
+                Width: =If(Screen_Registro_Herra_Equip_Visit.Size > 2, 40, 35)
+                X: =Parent.TemplateWidth-Icon5_1.Width
+                ZIndex: =16
+
+        Container7_1 As groupContainer.verticalAutoLayoutContainer:
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutGap: =10
+            LayoutMinHeight: =Label17_1.Height*2+txtObservaciones_1.Height+Image9_2.Height+Image9_3.Height
+            LayoutMinWidth: =0
+            LayoutMode: =LayoutMode.Auto
+            PaddingLeft: =5
+            PaddingRight: =5
+            ZIndex: =2
+
+            Label17_1 As label:
+                AlignInContainer: =AlignInContainer.Stretch
+                LayoutMinWidth: =0
+                Text: ="Observaciones"
+                ZIndex: =1
+
+            txtObservaciones_1 As text:
+                AlignInContainer: =AlignInContainer.Stretch
+                BorderColor: =RGBA(0, 0, 0, 1)
+                Default: =colRegIngreHerraEquipoVis.Observaciones
+                DisplayMode: =If(!IsBlank(colRegIngreHerraEquipoVis.Firma), DisplayMode.View, DisplayMode.Edit)
+                Height: =100
+                LayoutMinWidth: =0
+                Mode: =TextMode.MultiLine
+                Width: =0
+                ZIndex: =2
+
+            Image9_2 As image:
+                AlignInContainer: =AlignInContainer.Stretch
+                Height: =50
+                Image: =If(varFirma=PenInput1_2.Image || !IsBlank(colRegIngreHerraEquipoVis.Firma), BotónFirmaAceptada, BotónIngresarFirma)
+                LayoutMinWidth: =0
+                OnSelect: =Reset(PenInput1_2);Set(_bandFirma, true);
+                Visible: =If(!IsBlank(colRegIngreHerraEquipoVis.Firma), true, false)
+                Width: =0
+                ZIndex: =3
+
+            Image9_3 As image:
+                AlignInContainer: =AlignInContainer.Stretch
+                Height: =50
+                Image: =BotónGuardar
+                LayoutMinWidth: =0
+                OnSelect: |-
+                    =If(CountRows(Filter(colHerraEquipovist,Registrada<>true))=0,
+                        Notify("Ingresa al menos una herramienta nueva",NotificationType.Error),
+                        If(IsBlank(Trim(txtObservaciones_1.Text)),
+                            Notify("Ingresa las observaciones correspondientes", NotificationType.Error),
+                            If(!IsBlank(colRegIngreHerraEquipoVis.Firma), 
+                                Set(_bandRegisHerrEquip, true),
+                                Set(varFirmaHerra, Blank());
+                                Set(varFirmaHerraFinal, Blank());
+                                Reset(PenInput1_2);
+                                Set(_bandFirmaHerrEquip, true);
+                                //Set(_bandRegisHerrEquip; true);;
+                            )
+                            
+                        )
+                    )
+                Width: =0
+                ZIndex: =4
+
+    Label18_1 As label:
+        FontWeight: =FontWeight.Bold
+        Height: =If(Screen_Registro_Herra_Equip_Visit.Size > 2, 40, 40)
+        Size: =If(Screen_Registro_Herra_Equip_Visit.Size > 2, 13, 10)
+        Text: =varRegistroSelectVisit.Nombre
+        VerticalAlign: =VerticalAlign.Top
+        Width: =Parent.Width
+        X: =Image1_7.X
+        Y: =Image1_7.Y+Image1_7.Height
+        ZIndex: =9
+
+    Icon6_1 As icon.Add:
+        Color: =RGBA(0, 0, 0, 1)
+        Height: =40
+        Icon: =Icon.Add
+        OnSelect: =Set(_popupAddHerrEquip, true);
+        Visible: =true//CountRows(colHerraEquipo) > 0
+        Width: =40
+        X: =If(Screen_Registro_Herra_Equip_Visit.Size > 2, Gallery2_1.X+Gallery2_1.Width,Parent.Width/2-Self.Width/2)
+        Y: =Label18_1.Y+Label18_1.Height
+        ZIndex: =10
+
+    Image8_2 As image:
+        Height: =PenInput1_2.Height
+        Image: =Substitute(colRegIngreHerraEquipoVis.Firma,Char(34),"")
+        Visible: =_bandFirma && !IsBlank(colRegIngreHerraEquipoVis.Firma)
+        Width: =PenInput1_2.Width
+        X: =PenInput1_2.X
+        Y: =PenInput1_2.Y
+        ZIndex: =25
+
+    Group8_1 As group:
+        Height: =5
+        Width: =5
+        X: =60
+        Y: =60
+        ZIndex: =25
+
+        Rectangle4_3 As rectangle:
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =300
+            Visible: =_bandEliminarHerrEquip Or _bandRegisHerrEquip Or _bandFirmaHerrEquip
+            Width: =If(Screen_Registro_Herra_Equip_Visit.Size > 2, Parent.Width/3, Parent.Width-20)
+            X: =Parent.Width/2-Self.Width/2
+            Y: =Parent.Height/2-Self.Height/2
+            ZIndex: =20
+
+        Label9_3 As label:
+            Align: =Align.Center
+            FontWeight: =FontWeight.Bold
+            Text: =If(_bandRegisHerrEquip, "¿Estás seguro de registrar esta información?", "¿Estás seguro de eliminarlo?")
+            Visible: =_bandEliminarHerrEquip Or _bandRegisHerrEquip
+            Width: =Rectangle4_3.Width
+            X: =Rectangle4_3.X
+            Y: =Rectangle4_3.Y
+            ZIndex: =21
+
+        Button4_1 As button:
+            BorderThickness: =1
+            Fill: =RGBA(54, 176, 75, 1)
+            HoverFill: =ColorFade(Self.Fill, -20%)
+            OnSelect: |-
+                =Remove(colHerraEquipo, varItemsSelect);
+                Set(_bandEliminarHerrEquip, false);
+            RadiusBottomLeft: =100
+            RadiusBottomRight: =100
+            RadiusTopLeft: =100
+            RadiusTopRight: =100
+            Text: ="Eliminar"
+            Visible: =_bandEliminarHerrEquip
+            X: =Parent.Width/2-Self.Width/2
+            Y: =Rectangle4_3.Y+Rectangle4_3.Height/2-Self.Height/2
+            ZIndex: =22
+
+        Button7_6 As button:
+            BorderThickness: =1
+            Fill: =RGBA(54, 176, 75, 1)
+            HoverFill: =ColorFade(Self.Fill, -20%)
+            OnSelect: |
+                =
+                If(IsBlank(colRegIngreHerraEquipoVis.Firma),
+                    Set(varHerraEquipoGuardadoVisit, Patch(RegIngreHerraEquipoVisit, Defaults(RegIngreHerraEquipoVisit), { Observaciones: Trim(txtObservaciones_1.Text), Firma: varFirmaHerraFimal, IdRegIngreVisitas: varRegistroSelectVisit.ID}););
+                
+                    ForAll(colHerraEquipovist, Collect(HerraEquipoVisit, {Title: Text(varHerraEquipoGuardadoVisit.ID), EquipoHerramienta: colHerraEquipovist[@EquipoHerramienta], Cantidad: Value(colHerraEquipovist[@Cantidad]), Marca: colHerraEquipovist[@Marca], Modelo: colHerraEquipovist[@Modelo], Serie: colHerraEquipovist[@Serie]})),
+                    ClearCollect(colHerraEquipovist, Filter(colHerraEquipovist, Registrada<>true));
+                    ForAll(colHerraEquipovist, Collect(HerraEquipoVisit, {Title: Text(colRegIngreHerraEquipoVis.ID), EquipoHerramienta: colHerraEquipovist[@EquipoHerramienta], Cantidad: Value(colHerraEquipovist[@Cantidad]), Marca: colHerraEquipovist[@Marca], Modelo: colHerraEquipovist[@Modelo], Serie: colHerraEquipovist[@Serie]}))
+                );
+                
+                Reset(txtObservaciones_1);
+                Reset(PenInput1_2);
+                Set(_bandRegisHerrEquip, false);
+                Navigate(Screen_Index);
+            RadiusBottomLeft: =100
+            RadiusBottomRight: =100
+            RadiusTopLeft: =100
+            RadiusTopRight: =100
+            Text: ="Registrar"
+            Visible: =_bandRegisHerrEquip
+            X: =Parent.Width/2-Self.Width/2
+            Y: =(Rectangle4_3.Y+Rectangle4_3.Height/2)-Self.Height/2
+            ZIndex: =23
+
+        Button7_7 As button:
+            BorderThickness: =1
+            Fill: =RGBA(184, 0, 0, 1)
+            HoverFill: =ColorFade(Self.Fill, -20%)
+            OnSelect: =Set(_bandRegisHerrEquip, false);
+            RadiusBottomLeft: =100
+            RadiusBottomRight: =100
+            RadiusTopLeft: =100
+            RadiusTopRight: =100
+            Text: ="Cancelar"
+            Visible: =_bandRegisHerrEquip
+            X: =Parent.Width/2-Self.Width/2
+            Y: =Button7_6.Y+Button7_6.Height+20
+            ZIndex: =24
+
+    Label9_8 As label:
+        Align: =Align.Center
+        FontWeight: =FontWeight.Bold
+        Text: ="Ingresa tu firma"
+        Visible: =_bandFirmaHerrEquip
+        Width: =Rectangle4_3.Width
+        X: =Rectangle4_3.X
+        Y: =Rectangle4_3.Y
+        ZIndex: =27
+
+    Button7_17 As button:
+        BorderThickness: =1
+        Fill: =RGBA(184, 0, 0, 1)
+        HoverFill: =ColorFade(Self.Fill, -20%)
+        OnSelect: =Set(_bandFirmaHerrEquip, false);
+        RadiusBottomLeft: =100
+        RadiusBottomRight: =100
+        RadiusTopLeft: =100
+        RadiusTopRight: =100
+        Text: ="Cancelar"
+        Visible: =_bandFirmaHerrEquip
+        X: =Parent.Width/2-Self.Width/2
+        Y: =Button7_6.Y+Button7_6.Height+20
+        ZIndex: =28
+
+    Image9_5 As image:
+        Height: =50
+        Image: =If(varFirma=PenInput1_2.Image || !IsBlank(colRegIngreHerraEquipoVis.Firma), BotónFirmaAceptada, BotónIngresarFirma)
+        OnSelect: =Reset(PenInput1_2);Set(_bandFirma, true);Set(_bandFirmaHerrEquip, false);
+        Visible: =_bandFirmaHerrEquip
+        Width: =Label9_8.Width
+        X: =Label9_8.X
+        Y: =Label9_8.Y+Label9_8.Height*2
+        ZIndex: =29
+
+    Group4_1 As group:
+        Height: =5
+        Width: =5
+        X: =60
+        Y: =60
+        ZIndex: =52
+
+        Rectangle3_3 As rectangle:
+            Fill: =RGBA(255, 255, 255, 0.76)
+            Height: =Parent.Height
+            Visible: =_popupAddHerrEquip Or _bandEditHerrEquip Or _bandEliminarHerrEquip Or _bandRegisHerrEquip Or _bandFirmaHerrEquip
+            Width: =Parent.Width
+            ZIndex: =11
+
+        Label5_1 As label:
+            Align: =Align.Center
+            FontWeight: =FontWeight.Bold
+            Size: =If(Screen_Registro_Herra_Equip_Visit.Size > 2, 20, 15)
+            Text: =If(_bandEditHerrEquip, "Edita el elemento", "Agrega nuevo elemento")
+            Visible: =_popupAddHerrEquip Or _bandEditHerrEquip
+            Width: =Parent.Width
+            ZIndex: =12
+
+        Container6_1 As groupContainer.verticalAutoLayoutContainer:
+            BorderColor: =RGBA(235, 38, 44, 1)
+            BorderThickness: =2
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =Parent.Height-Label5_1.Height
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutGap: =5
+            LayoutMode: =LayoutMode.Auto
+            LayoutOverflowY: =LayoutOverflow.Scroll
+            PaddingLeft: =5
+            PaddingRight: =5
+            Visible: =_popupAddHerrEquip Or _bandEditHerrEquip
+            Width: =If(Screen_Registro_Herra_Equip_Visit.Size > 2, Parent.Width/2, Parent.Width-20)
+            X: =Parent.Width/2-Self.Width/2
+            Y: =Label5_1.Y+Label5_1.Height
+            ZIndex: =13
+
+            Label7_14 As label:
+                AlignInContainer: =AlignInContainer.Stretch
+                FontWeight: =FontWeight.Semibold
+                Text: ="Herramienta / Equipo"
+                Width: =0
+                X: =543
+                Y: =40
+                ZIndex: =1
+
+            txtHerrEquip_1 As text:
+                AlignInContainer: =AlignInContainer.Stretch
+                BorderColor: =RGBA(0, 0, 0, 1)
+                Default: =If(_bandEditHerrEquip, varItemsSelect.EquipoHerramienta, "")
+                Width: =0
+                X: =543
+                Y: =45
+                ZIndex: =2
+
+            Label7_15 As label:
+                AlignInContainer: =AlignInContainer.Stretch
+                FontWeight: =FontWeight.Semibold
+                Text: ="Cantidad"
+                Width: =0
+                X: =543
+                Y: =85
+                ZIndex: =3
+
+            txtCantidad_1 As text:
+                AlignInContainer: =AlignInContainer.Stretch
+                BorderColor: =RGBA(0, 0, 0, 1)
+                Default: =If(_bandEditHerrEquip, varItemsSelect.Cantidad, "")
+                Format: =TextFormat.Number
+                Width: =0
+                X: =543
+                Y: =130
+                ZIndex: =4
+
+            Label7_16 As label:
+                AlignInContainer: =AlignInContainer.Stretch
+                FontWeight: =FontWeight.Semibold
+                Text: ="Marca"
+                Width: =0
+                X: =543
+                Y: =170
+                ZIndex: =5
+
+            txtMarca_1 As text:
+                AlignInContainer: =AlignInContainer.Stretch
+                BorderColor: =RGBA(0, 0, 0, 1)
+                Default: =If(_bandEditHerrEquip, varItemsSelect.Marca, "")
+                Width: =0
+                X: =543
+                Y: =215
+                ZIndex: =6
+
+            Label7_17 As label:
+                AlignInContainer: =AlignInContainer.Stretch
+                FontWeight: =FontWeight.Semibold
+                Text: ="Modelo"
+                Width: =0
+                X: =543
+                Y: =255
+                ZIndex: =7
+
+            txtModelo_1 As text:
+                AlignInContainer: =AlignInContainer.Stretch
+                BorderColor: =RGBA(0, 0, 0, 1)
+                Default: =If(_bandEditHerrEquip, varItemsSelect.Modelo, "")
+                Width: =0
+                X: =543
+                Y: =300
+                ZIndex: =8
+
+            Label7_18 As label:
+                AlignInContainer: =AlignInContainer.Stretch
+                FontWeight: =FontWeight.Semibold
+                Text: ="Serie"
+                Width: =0
+                X: =543
+                Y: =344
+                ZIndex: =9
+
+            txtSerie_1 As text:
+                AlignInContainer: =AlignInContainer.Stretch
+                BorderColor: =RGBA(0, 0, 0, 1)
+                Default: =If(_bandEditHerrEquip, varItemsSelect.Serie, "")
+                Width: =0
+                X: =543
+                Y: =389
+                ZIndex: =10
+
+            Label7_19 As label:
+                AlignInContainer: =AlignInContainer.Stretch
+                FontWeight: =FontWeight.Semibold
+                Height: =10
+                Text: =""
+                Width: =0
+                X: =543
+                Y: =344
+                ZIndex: =11
+
+            Button2_2 As button:
+                AlignInContainer: =AlignInContainer.Stretch
+                DisplayMode: =If(IsBlank(Trim(txtHerrEquip_1.Text)) || IsBlank(Trim(txtCantidad_1.Text)) || IsBlank(Trim(txtMarca_1.Text)) || IsBlank(Trim(txtModelo_1.Text)) || IsBlank(Trim(txtSerie_1.Text)), Disabled, Edit)
+                Fill: =RGBA(54, 176, 75, 1)
+                HoverFill: =ColorFade(Self.Fill, -20%)
+                OnSelect: |+
+                    =
+                    If(IsNumeric(txtCantidad_1.Text),
+                        If(_popupAddHerrEquip,
+                            
+                            Collect(colHerraEquipovist, {EquipoHerramienta: Trim(txtHerrEquip_1.Text), Cantidad: Value(Trim(txtCantidad_1.Text)), Marca: Trim(txtMarca_1.Text), Modelo: Trim(txtModelo_1.Text), Serie: Trim(txtSerie_1.Text), Index: CountRows(colHerraEquipovist)+1 }),
+                            UpdateIf(colHerraEquipovist, Index=varItemsSelect.Index, {EquipoHerramienta: Trim(txtHerrEquip_1.Text), Cantidad: Value(Trim(txtCantidad_1.Text)), Marca: Trim(txtMarca_1.Text), Modelo: Trim(txtModelo_1.Text), Serie: Trim(txtSerie_1.Text) })
+                        );
+                        Reset(txtHerrEquip_1);
+                        Reset(txtCantidad_1);
+                        Reset(txtMarca_1);
+                        Reset(txtModelo_1);
+                        Reset(txtSerie_1);
+                        Set(_popupAddHerrEquip, false);
+                        Set(_bandEditHerrEquip, false), 
+                        Notify("La cantidad debe de ser número")
+                    );
+                    
+                    
+                    
+                RadiusBottomLeft: =80
+                RadiusBottomRight: =80
+                RadiusTopLeft: =80
+                RadiusTopRight: =80
+                Text: =If(_bandEditHerrEquip, "Editar", "Agregar")
+                Width: =0
+                ZIndex: =12
+
+            Label7_20 As label:
+                AlignInContainer: =AlignInContainer.Stretch
+                FontWeight: =FontWeight.Semibold
+                Height: =10
+                Text: =""
+                Width: =0
+                X: =543
+                Y: =344
+                ZIndex: =13
+
+            Button2_3 As button:
+                AlignInContainer: =AlignInContainer.Stretch
+                Fill: =RGBA(184, 0, 0, 1)
+                HoverFill: =ColorFade(Self.Fill, -20%)
+                OnSelect: |-
+                    =Reset(txtHerrEquip_1);
+                    Reset(txtCantidad_1);
+                    Reset(txtMarca_1);
+                    Reset(txtModelo_1);
+                    Reset(txtSerie_1);
+                    Set(_popupAddHerrEquip, false);
+                    Set(_bandEditHerrEquip, false);
+                RadiusBottomLeft: =80
+                RadiusBottomRight: =80
+                RadiusTopLeft: =80
+                RadiusTopRight: =80
+                Text: ="Cancelar"
+                Width: =0
+                ZIndex: =14
+
+        Icon3_1 As icon.Cancel:
+            Color: =RGBA(0, 0, 0, 1)
+            Height: =40
+            Icon: =Icon.Cancel
+            OnSelect: =Set(_popupAddHerrEquip, false);Set(_bandEditHerrEquip, false);Set(_bandEliminarHerrEquip, false);Set(_bandRegisHerrEquip, false);
+            Visible: =_popupAddHerrEquip Or _bandEditHerrEquip Or _bandEliminarHerrEquip Or _bandRegisHerrEquip
+            Width: =40
+            X: =Parent.Width-Icon3_1.Width
+            ZIndex: =14
+
+    Group1_2 As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =57
+
+        Rectangle1_2 As rectangle:
+            Fill: =RGBA(237, 125, 49, 0.57)
+            Height: =Parent.Height
+            Visible: =_bandFirma
+            Width: =Parent.Width
+            ZIndex: =15
+
+        Label4_2 As label:
+            Align: =Align.Center
+            Color: =RGBA(255, 255, 255, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =90
+            Size: =If(Screen_Index.Size > 2, 30, 15)
+            Text: ="Firma en el recuadro blanco"
+            Visible: =_bandFirma
+            Width: =Parent.Width
+            Y: =PenInput1_2.Y-Label4_2.Height
+            ZIndex: =16
+
+        PenInput1_2 As inkControl:
+            Fill: =RGBA(255, 255, 255, 1)
+            OnSelect: =Set(varFirmaHerra, Self.Image);
+            Reset: =true
+            Visible: =_bandFirma && IsBlank(colRegIngreHerraEquipoVis.Firma)
+            Width: =If(Screen_Index.Size > 2, Parent.Width/2, Parent.Width-10)
+            X: =Parent.Width/2-PenInput1_2.Width/2
+            Y: =Parent.Height/2-PenInput1_2.Height/2
+            ZIndex: =17
+
+        Image6_4 As image:
+            Height: =50
+            Image: =BotónAceptar
+            OnSelect: |-
+                =If(varFirmaHerra=PenInput1_2.Image,
+                Set(_bandRegisHerrEquip, true);
+                Set(_bandFirmaHerrEquip, false);
+                Set(_bandFirma, false);
+                Set(varFirmaHerraFimal, JSON(varFirmaHerra,JSONFormat.IncludeBinaryData)),
+                Set(_bandRegisHerrEquip, false);
+                Set(_bandFirmaHerrEquip, true);
+                Set(varFirmaHerraFimal, Blank());
+                Set(_bandFirma, false);
+                );
+            Visible: =_bandFirma && IsBlank(colRegIngreHerraEquipoVis.Firma)
+            Width: =50
+            X: =PenInput1_2.X+PenInput1_2.Width-Image6_4.Width*2-20
+            Y: =PenInput1_2.Y+PenInput1_2.Height+10
+            ZIndex: =18
+
+        Image6_5 As image:
+            Height: =50
+            Image: =BotónCancelar
+            OnSelect: =Reset(PenInput1_2);Set(_bandFirma, false);
+            Visible: =_bandFirma
+            Width: =50
+            X: =PenInput1_2.X+PenInput1_2.Width-Image6_5.Width
+            Y: =PenInput1_2.Y+PenInput1_2.Height+10
+            ZIndex: =19
+
+    Group6_2 As group:
+        Height: =5
+        Width: =5
+        X: =80
+        Y: =80
+        ZIndex: =63
+
+        Image7_9 As image:
+            Height: =If(Screen_Index.Size > 2, 50, 40)
+            Image: =BotónHome
+            Width: =If(Screen_Index.Size > 2, 50, 40)
+            X: =Parent.Width-Image7_9.Width
+            Y: =Label18_1.Y+Label18_1.Height
+            ZIndex: =6
+
+        Icon1_9 As icon.Cancel:
+            Color: =RGBA(0, 0, 0, 0)
+            Height: =Image7_9.Height
+            Icon: =Icon.Cancel
+            OnSelect: =Navigate(Screen_Index,ScreenTransition.Cover)
+            Width: =Image7_9.Width
+            X: =Image7_9.X
+            Y: =Image7_9.Y
+            ZIndex: =7
+
+    Group6_3 As group:
+        Height: =5
+        Width: =5
+        X: =1286
+        Y: =688
+        ZIndex: =65
+
+        Image7_8 As image:
+            Height: =If(Screen_Index.Size > 2, 50, 40)
+            Image: =BotónAtrás
+            Width: =If(Screen_Index.Size > 2, 50, 40)
+            Y: =Label18_1.Y+Label18_1.Height
+            ZIndex: =2
+
+        Icon1_8 As icon.Cancel:
+            Color: =RGBA(0, 0, 0, 0)
+            Height: =Image7_8.Height
+            Icon: =Icon.Cancel
+            OnSelect: =Navigate(Screen_Detalle_Herra_Equip_Visit,ScreenTransition.Cover)
+            Width: =Image7_8.Width
+            X: =Image7_8.X
+            Y: =Image7_8.Y
+            ZIndex: =3
+

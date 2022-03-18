@@ -1,0 +1,263 @@
+Screen_Confirm_Registro_Visita As screen:
+    BackgroundImage: =PantallaCel3
+    ImagePosition: =ImagePosition.Stretch
+    OnVisible: =
+
+    Image1_6 As image:
+        Height: =If(Screen_Index.Size > 2, 100, 100)
+        Image: =EncabezadoPantallaCel1
+        ImagePosition: =ImagePosition.Fill
+        Width: =Parent.Width/2+Parent.Width/3
+        X: =Parent.Width/2-Image1_6.Width/2
+        ZIndex: =1
+
+    Button1_9 As button:
+        DisplayMode: =DisplayMode.View
+        Fill: =RGBA(235, 38, 44, 1)
+        Height: =80
+        Size: =If(Screen_Index.Size > 2, 30, 15)
+        Text: ="Registro"
+        Width: =If(Screen_Index.Size > 2, Parent.Width/3, Parent.Width/2) 
+        X: =Parent.Width/2-Button1_9.Width/2
+        Y: =(Image1_6.Y+Image1_6.Height)/2-Button1_9.Height/2
+        ZIndex: =2
+
+    Label7_13 As label:
+        FontWeight: =FontWeight.Semibold
+        Height: =42
+        Text: |-
+            ="Código: DRH-FR-PDI-005"
+        Width: =223
+        X: =Image1_6.X
+        Y: =Image1_6.Y+Image1_6.Height
+        ZIndex: =8
+
+    Rectangle2_1 As rectangle:
+        BorderColor: =RGBA(235, 38, 44, 1)
+        BorderThickness: =5
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =Parent.Height-Image1_6.Height-Label7_13.Height*2
+        Width: =If(Screen_Index.Size > 2, Parent.Width/2, Parent.Width-10)
+        X: =Parent.Width/2-Rectangle2_1.Width/2
+        Y: =Label7_13.Y+Label7_13.Height
+        ZIndex: =12
+
+    Group2_4 As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =15
+
+        Label6_17 As label:
+            Align: =Align.Right
+            FontWeight: =FontWeight.Bold
+            Height: =30
+            Size: =15
+            Text: |-
+                ="Folio:"
+            Width: =Rectangle2_1.Width/2
+            X: =Rectangle2_1.X
+            Y: =Rectangle2_1.Y
+            ZIndex: =13
+
+        Label6_18 As label:
+            FontWeight: =FontWeight.Bold
+            Height: =30
+            Size: =15
+            Text: =varDatosGuardadosVisita.Title & varDatosGuardadosVisita.ID
+            Width: =Rectangle2_1.Width/2
+            X: =Label6_17.X+Label6_17.Width
+            Y: =Label6_17.Y
+            ZIndex: =14
+
+    Group2_3 As group:
+        Height: =5
+        Width: =5
+        X: =361.5
+        Y: =212
+        ZIndex: =17
+
+        Label6_19 As label:
+            Align: =Align.Right
+            FontWeight: =FontWeight.Bold
+            Height: =30
+            Size: =15
+            Text: |-
+                ="Entrada:"
+            Width: =Rectangle2_1.Width/2
+            X: =Rectangle2_1.X
+            Y: =Label6_17.Y+Label6_17.Height
+            ZIndex: =15
+
+        Label6_20 As label:
+            FontWeight: =FontWeight.Bold
+            Height: =30
+            Size: =15
+            Text: ="Pendiente"
+            Width: =Rectangle2_1.Width/2
+            X: =Label6_19.X+Label6_19.Width
+            Y: =Label6_19.Y
+            ZIndex: =16
+
+    Label6_23 As label:
+        Align: =Align.Center
+        FontWeight: =FontWeight.Semibold
+        Height: =30
+        Size: =20
+        Text: =varDatosGuardadosVisita.Nombre
+        Width: =Rectangle2_1.Width
+        X: =Rectangle2_1.X
+        Y: =Label6_21.Y+Label6_21.Height
+        ZIndex: =19
+
+    Group2_5 As group:
+        Height: =5
+        Width: =5
+        X: =361
+        Y: =252
+        ZIndex: =19
+
+        Label6_21 As label:
+            Align: =Align.Right
+            FontWeight: =FontWeight.Bold
+            Height: =30
+            Size: =15
+            Text: |-
+                ="Salida:"
+            Width: =Rectangle2_1.Width/2
+            X: =Rectangle2_1.X
+            Y: =Label6_19.Y+Label6_19.Height
+            ZIndex: =17
+
+        Label6_22 As label:
+            FontWeight: =FontWeight.Bold
+            Height: =30
+            Size: =15
+            Text: ="Pendiente"
+            Width: =Rectangle2_1.Width/2
+            X: =Label6_21.X+Label6_21.Width
+            Y: =Label6_21.Y
+            ZIndex: =18
+
+    Group3_5 As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =22
+
+        Label6_24 As label:
+            Align: =Align.Right
+            FontWeight: =FontWeight.Semibold
+            Height: =30
+            Size: =17
+            Text: |-
+                ="Clave Acceso:"
+            Width: =Rectangle2_1.Width/2
+            X: =Rectangle2_1.X
+            Y: =Label6_28.Y+Label6_28.Height
+            ZIndex: =20
+
+        Label6_25 As label:
+            FontWeight: =FontWeight.Semibold
+            Height: =30
+            Size: =15
+            Text: =varDatosGuardadosVisita.KeyAcceso
+            Width: =Rectangle2_1.Width/2
+            X: =Label6_24.X+Label6_24.Width
+            Y: =Label6_24.Y
+            ZIndex: =21
+
+    Group3_6 As group:
+        Height: =5
+        Width: =5
+        X: =361.5
+        Y: =462
+        ZIndex: =24
+
+        Label6_26 As label:
+            Align: =Align.Right
+            FontWeight: =FontWeight.Semibold
+            Height: =30
+            Size: =17
+            Text: |-
+                ="Vehículo:"
+            Width: =Rectangle2_1.Width/2
+            X: =Rectangle2_1.X
+            Y: =Label6_23.Y+Label6_23.Height
+            ZIndex: =22
+
+        Label6_27 As label:
+            FontWeight: =FontWeight.Semibold
+            Height: =30
+            Size: =15
+            Text: =varDatosGuardadosVisita.MarcaVehiculo
+            Width: =Rectangle2_1.Width/2
+            X: =Label6_26.X+Label6_26.Width
+            Y: =Label6_26.Y
+            ZIndex: =23
+
+    Image4_1 As image:
+        Height: =Rectangle2_1.Height-Label6_17.Height-Label6_19.Height-Label6_21.Height-Label6_23.Height-Label6_24.Height-Label6_26.Height-Label6_28.Height-5
+        Image: |-
+            =Concatenate("https://chart.googleapis.com/chart?cht=qr&chl=",Text(varDatosGuardados.Title & varDatosGuardados.ID) ,"&chs=",Text(350),"x" ,  Text(350))
+        Width: =400
+        X: =Parent.Width/2-Image4_1.Width/2
+        Y: =Label6_24.Y+Label6_24.Height
+        ZIndex: =26
+
+    Group3_7 As group:
+        Height: =5
+        Width: =5
+        X: =361
+        Y: =512
+        ZIndex: =26
+
+        Label6_28 As label:
+            Align: =Align.Right
+            FontWeight: =FontWeight.Semibold
+            Height: =30
+            Size: =17
+            Text: |-
+                ="Placas:"
+            Width: =Rectangle2_1.Width/2
+            X: =Rectangle2_1.X
+            Y: =Label6_26.Y+Label6_26.Height
+            ZIndex: =24
+
+        Label6_29 As label:
+            FontWeight: =FontWeight.Semibold
+            Height: =30
+            Size: =15
+            Text: =varDatosGuardadosVisita.Placas
+            Width: =Rectangle2_1.Width/2
+            X: =Label6_28.X+Label6_28.Width
+            Y: =Label6_28.Y
+            ZIndex: =25
+
+    Group12_1 As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =33
+
+        Image7_7 As image:
+            Height: =If(Screen_Confirm_Registro_Visita.Size > 2, 50, 40)
+            Image: =BotónHome
+            Width: =If(Screen_Confirm_Registro_Visita.Size > 2, 50, 40)
+            X: =Parent.Width-Self.Width-10
+            Y: =Image1_6.Y+Image1_6.Height
+            ZIndex: =27
+
+        Icon1_7 As icon.Cancel:
+            Color: =RGBA(0, 0, 0, 0)
+            Height: =Image7_7.Height
+            Icon: =Icon.Cancel
+            OnSelect: =Navigate(Screen_Index,ScreenTransition.Cover)
+            Width: =Image7_7.Width
+            X: =Image7_7.X
+            Y: =Image7_7.Y
+            ZIndex: =28
+

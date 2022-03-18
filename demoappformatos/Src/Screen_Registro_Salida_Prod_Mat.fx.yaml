@@ -1,0 +1,1454 @@
+Screen_Registro_Salida_Prod_Mat As screen:
+    BackgroundImage: =PantallaCel3
+    ImagePosition: =ImagePosition.Stretch
+    OnVisible: |
+        =Set(varFirmaSoli, Blank());
+        Set(varFirmaSoliFinal, Blank());
+        Set(_bandFirmaConfirm, false);
+        Set(varJefeDepto, Blank());
+        Set(varPersAlmacen, Blank());
+        Set(varPersGuardia, Blank());
+        ClearCollect(colBandSalProdMat, { _bandGeneral: true, _bandArticulos: false });
+        If(varSaldProdMat="1", 
+            ClearCollect(colArticulos, {});
+            Remove(colArticulos, First(colArticulos));
+            /*; 
+            ClearCollect(colArticulos; Filter(RegArticulos; Title=Text(varRegistroSaldProdMat.ID)));;
+            */
+        )
+
+    Image1_23 As image:
+        Height: =If(Screen_Registro_Salida_Prod_Mat.Size > 2, 100, 100)
+        Image: =EncabezadoPantallaCel1
+        ImagePosition: =ImagePosition.Fill
+        Width: =Parent.Width/2+Parent.Width/3
+        X: =Parent.Width/2-Image1_23.Width/2
+        ZIndex: =5
+
+    Button1_13 As button:
+        DisplayMode: =DisplayMode.View
+        Fill: =RGBA(235, 38, 44, 1)
+        Height: =55
+        Size: =If(Screen_Registro_Salida_Prod_Mat.Size > 2, 15, 10)
+        Text: |-
+            ="Registro de salida de producto y material
+            "
+        Width: =If(Screen_Registro_Salida_Prod_Mat.Size > 2, Parent.Width/3+50, Parent.Width/2+50) 
+        X: =Parent.Width/2-Self.Width/2
+        ZIndex: =6
+
+    Container14_4 As groupContainer.verticalAutoLayoutContainer:
+        Height: =Parent.Height-Image1_23.Height-Label50.Height-Button5_5.Height
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutMode: =LayoutMode.Auto
+        LayoutOverflowY: =LayoutOverflow.Scroll
+        Visible: =First(colBandSalProdMat)._bandGeneral
+        Width: =Parent.Width/2+Parent.Width/3
+        X: =Parent.Width/2-Self.Width/2
+        Y: =Button5_5.Y+Button5_5.Height
+        ZIndex: =7
+
+        Container2_27 As groupContainer.verticalAutoLayoutContainer:
+            FillPortions: =0
+            Height: =If(Screen_Registro_Salida_Prod_Mat.Size > 2, 80, 160)
+            LayoutDirection: =If(Screen_Index.Size > 2,LayoutDirection.Horizontal,LayoutDirection.Vertical)
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            Width: =Parent.Width/2+Parent.Width/3
+            X: =113
+            Y: =256
+            ZIndex: =1
+
+            Container3_28 As groupContainer.verticalAutoLayoutContainer:
+                AlignInContainer: =AlignInContainer.Start
+                Height: =80
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinHeight: =80
+                LayoutMinWidth: =0
+                LayoutMode: =LayoutMode.Auto
+                PaddingLeft: =5
+                Width: =Container2_27.Width
+                ZIndex: =1
+
+                Label8_44 As label:
+                    FontWeight: =FontWeight.Bold
+                    Height: =30
+                    LayoutMinHeight: =0
+                    Text: ="Nombres solicitante"
+                    Width: =If(Screen_Registro_Salida_Prod_Mat.Size > 2, Image1_23.Width/2-20, Image1_23.Width-20)
+                    X: =Image1_1.X
+                    Y: =Image1_1.Y+Image1_1.Height
+                    ZIndex: =1
+
+                txtNombre1_15 As text:
+                    BorderColor: =RGBA(0, 0, 0, 1)
+                    Clear: =true
+                    Default: =""//If(varSaldProdMat="1"; ""; varRegistroSaldProdMat.NombreSolicitante)
+                    DisplayMode: =If(varSaldProdMat="1", Edit, View)
+                    Height: =30
+                    HintText: ="Ingresa tus nombres"
+                    Width: =Label8_44.Width
+                    X: =Label8_44.X
+                    Y: =Label8_44.Y+Label8_44.Height
+                    ZIndex: =2
+
+            Container4_17 As groupContainer.verticalAutoLayoutContainer:
+                AlignInContainer: =AlignInContainer.Start
+                Height: =80
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinHeight: =100
+                LayoutMinWidth: =0
+                LayoutMode: =LayoutMode.Auto
+                PaddingLeft: =5
+                Width: =Container2_27.Width
+                ZIndex: =2
+
+                Label8_45 As label:
+                    FontWeight: =FontWeight.Bold
+                    Height: =30
+                    Text: ="Apellidos solicitante"
+                    Width: =If(Screen_Registro_Salida_Prod_Mat.Size > 2,Image1_23.Width/2-20, Image1_23.Width-20)
+                    X: =If(Screen_Index.Size > 2,Label8_44.X+Label8_44.Width, Label8_44.X)
+                    Y: =If(Screen_Index.Size > 2, Label8_44.Y, txtNombre1_15.Y+Label8_45.Height)
+                    ZIndex: =1
+
+                txtApellidos1_9 As text:
+                    BorderColor: =RGBA(0, 0, 0, 1)
+                    Clear: =true
+                    Default: =""//If(varSaldProdMat="1"; ""; varRegistroSaldProdMat.ApellidosSolicitante)
+                    DisplayMode: =If(varSaldProdMat="1", Edit, View)
+                    Height: =30
+                    HintText: ="Ingresa tus apellidos"
+                    Width: =Label8_45.Width
+                    X: =Label8_45.X
+                    Y: =Label8_45.Y+Label8_45.Height
+                    ZIndex: =2
+
+        Container2_28 As groupContainer.verticalAutoLayoutContainer:
+            FillPortions: =0
+            Height: =If(Screen_Registro_Salida_Prod_Mat.Size > 2, 80, 160)
+            LayoutDirection: =If(Screen_Index.Size > 2,LayoutDirection.Horizontal,LayoutDirection.Vertical)
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            Width: =Parent.Width/2+Parent.Width/3
+            X: =113
+            Y: =256
+            ZIndex: =2
+
+            Container3_29 As groupContainer.verticalAutoLayoutContainer:
+                AlignInContainer: =AlignInContainer.Start
+                Height: =80
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinHeight: =80
+                LayoutMinWidth: =0
+                LayoutMode: =LayoutMode.Auto
+                PaddingLeft: =5
+                Width: =Container2_28.Width
+                ZIndex: =1
+
+                Label8_46 As label:
+                    FontWeight: =FontWeight.Bold
+                    Height: =30
+                    LayoutMinHeight: =0
+                    Text: ="Correo solicitante"
+                    Width: =If(Screen_Registro_Salida_Prod_Mat.Size > 2, Image1_23.Width/2-20, Image1_23.Width-20)
+                    X: =Image1_1.X
+                    Y: =Image1_1.Y+Image1_1.Height
+                    ZIndex: =1
+
+                txtNombre1_16 As text:
+                    BorderColor: =RGBA(0, 0, 0, 1)
+                    Clear: =true
+                    Default: =""//If(varSaldProdMat="1"; ""; varRegistroSaldProdMat.CorreoSolicitante)
+                    DisplayMode: =If(varSaldProdMat="1", Edit, View)
+                    Height: =30
+                    HintText: ="Ingresa tu correo"
+                    Width: =Label8_46.Width
+                    X: =Label8_46.X
+                    Y: =Label8_46.Y+Label8_46.Height
+                    ZIndex: =2
+
+            Container3_41 As groupContainer.verticalAutoLayoutContainer:
+                AlignInContainer: =AlignInContainer.Start
+                Height: =80
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinHeight: =80
+                LayoutMinWidth: =0
+                LayoutMode: =LayoutMode.Auto
+                PaddingLeft: =5
+                Width: =Container2_28.Width
+                ZIndex: =2
+
+                Label8_47 As label:
+                    FontWeight: =FontWeight.Bold
+                    Height: =30
+                    LayoutMinHeight: =0
+                    Text: ="Unidad Operativa o Área Staff"
+                    Width: =If(Screen_Registro_Salida_Prod_Mat.Size > 2, Image1_23.Width/2-20, Image1_23.Width-20)
+                    X: =Image1_1.X
+                    Y: =Image1_1.Y+Image1_1.Height
+                    ZIndex: =1
+
+                txtNombre1_24 As text:
+                    BorderColor: =RGBA(0, 0, 0, 1)
+                    Clear: =true
+                    Default: =""//If(varSaldProdMat="1"; ""; varRegistroSaldProdMat.UnidadOperativa)
+                    DisplayMode: =If(varSaldProdMat="1", Edit, View)
+                    Height: =30
+                    HintText: ="Ingresa tu unidad operativa o área staff"
+                    Width: =Label8_47.Width
+                    X: =Label8_47.X
+                    Y: =Label8_47.Y+Label8_47.Height
+                    ZIndex: =2
+
+        Container2_29 As groupContainer.verticalAutoLayoutContainer:
+            FillPortions: =0
+            Height: =If(Screen_Registro_Salida_Prod_Mat.Size > 2, 80, 160)
+            LayoutDirection: =If(Screen_Index.Size > 2,LayoutDirection.Horizontal,LayoutDirection.Vertical)
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            Width: =Parent.Width/2+Parent.Width/3
+            X: =113
+            Y: =256
+            ZIndex: =3
+
+            Container3_30 As groupContainer.verticalAutoLayoutContainer:
+                AlignInContainer: =AlignInContainer.Start
+                Height: =80
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinHeight: =80
+                LayoutMinWidth: =0
+                LayoutMode: =LayoutMode.Auto
+                PaddingLeft: =5
+                Width: =Container2_29.Width
+                ZIndex: =1
+
+                Label8_48 As label:
+                    FontWeight: =FontWeight.Bold
+                    Height: =30
+                    LayoutMinHeight: =0
+                    Text: ="Almacen"
+                    Width: =If(Screen_Registro_Salida_Prod_Mat.Size > 2, Image1_23.Width/2-20, Image1_23.Width-20)
+                    X: =Image1_1.X
+                    Y: =Image1_1.Y+Image1_1.Height
+                    ZIndex: =1
+
+                txtNombre1_17 As text:
+                    BorderColor: =RGBA(0, 0, 0, 1)
+                    Clear: =true
+                    Default: =""//If(varSaldProdMat="1"; ""; varRegistroSaldProdMat.Almacen)
+                    DisplayMode: =If(varSaldProdMat="1", Edit, View)
+                    Height: =30
+                    HintText: ="Ingresa el área"
+                    Width: =Label8_48.Width
+                    X: =Label8_48.X
+                    Y: =Label8_48.Y+Label8_48.Height
+                    ZIndex: =2
+
+        Button5 As button:
+            AlignInContainer: =AlignInContainer.Stretch
+            DisplayMode: =If(varSaldProdMat="1", Edit, View)
+            Fill: |-
+                =If(varSaldProdMat="1",
+                    If(varSaldProdMat="1" && !IsBlank(varJefeDepto), RGBA(54, 176, 75, 1), varSaldProdMat="1" && IsBlank(varJefeDepto), RGBA(184, 0, 0, 1), RGBA(54, 176, 75, 1))/*;
+                    Switch(varRegistroSaldProdMat.StatusJefeDepto;
+                        "En espera";
+                        RGBA(149; 149; 149; 1);
+                        "Autorizada";
+                        RGBA(54; 176; 75; 1);
+                        "Rechazada";
+                        RGBA(184; 0; 0; 1)
+                    )*/
+                )
+            HoverFill: =ColorFade(Self.Fill, -20%)
+            OnSelect: |-
+                =Reset(TextInput3);
+                Set(_titulo, "Vo.Bo. JEFE DEPTO");
+                Set(_bandJefeDepto, true);
+            Text: |-
+                ="Elegir Vo.Bo. JEFE DEPTO"
+                /*If(varSaldProdMat="1";
+                    "Elegir Vo.Bo. JEFE DEPTO";
+                    varRegistroSaldProdMat.StatusJefeDepto & " Vo.Bo. JEFE DEPTO"
+                )*/
+            ZIndex: =4
+
+        Container2_30 As groupContainer.verticalAutoLayoutContainer:
+            FillPortions: =0
+            Height: =If(Screen_Registro_Salida_Prod_Mat.Size > 2, 80, 160)
+            LayoutDirection: =If(Screen_Index.Size > 2,LayoutDirection.Horizontal,LayoutDirection.Vertical)
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            Visible: =If(varSaldProdMat="1" && !IsBlank(varJefeDepto), true, varSaldProdMat="1" && IsBlank(varJefeDepto), false, true)
+            Width: =Parent.Width/2+Parent.Width/3
+            X: =113
+            Y: =256
+            ZIndex: =5
+
+            Container3_31 As groupContainer.verticalAutoLayoutContainer:
+                AlignInContainer: =AlignInContainer.Start
+                Height: =80
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinHeight: =80
+                LayoutMinWidth: =0
+                LayoutMode: =LayoutMode.Auto
+                PaddingLeft: =5
+                Width: =Container2_30.Width
+                ZIndex: =1
+
+                Label8_49 As label:
+                    FontWeight: =FontWeight.Bold
+                    Height: =30
+                    LayoutMinHeight: =0
+                    Text: ="Nombres Vo.Bo. JEFE DEPTO"
+                    Width: =If(Screen_Registro_Salida_Prod_Mat.Size > 2, Image1_23.Width/2-20, Image1_23.Width-20)
+                    X: =Image1_1.X
+                    Y: =Image1_1.Y+Image1_1.Height
+                    ZIndex: =1
+
+                txtNombre1_18 As text:
+                    BorderColor: =RGBA(0, 0, 0, 1)
+                    Clear: =true
+                    Default: =varJefeDepto.DisplayName//If(varSaldProdMat="1"; varJefeDepto.DisplayName; varRegistroSaldProdMat.NombreJefeDepto)
+                    DisplayMode: =View
+                    Height: =30
+                    HintText: ="Ingresa los nombres de Vo.Bo. JEFE DEPTO"
+                    Width: =Label8_49.Width
+                    X: =Label8_49.X
+                    Y: =Label8_49.Y+Label8_49.Height
+                    ZIndex: =2
+
+            Container4_18 As groupContainer.verticalAutoLayoutContainer:
+                AlignInContainer: =AlignInContainer.Start
+                Height: =80
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinHeight: =100
+                LayoutMinWidth: =0
+                LayoutMode: =LayoutMode.Auto
+                PaddingLeft: =5
+                Width: =Container2_30.Width
+                ZIndex: =2
+
+                Label8_50 As label:
+                    FontWeight: =FontWeight.Bold
+                    Height: =30
+                    Text: ="Correo Vo.Bo. JEFE DEPTO"
+                    Width: =If(Screen_Registro_Salida_Prod_Mat.Size > 2,Image1_23.Width/2-20, Image1_23.Width-20)
+                    X: =If(Screen_Index.Size > 2,Label8_49.X+Label8_49.Width, Label8_49.X)
+                    Y: =If(Screen_Index.Size > 2, Label8_49.Y, txtNombre1_18.Y+Label8_50.Height)
+                    ZIndex: =1
+
+                txtApellidos1_10 As text:
+                    BorderColor: =RGBA(0, 0, 0, 1)
+                    Clear: =true
+                    Default: =varJefeDepto.Mail//If(varSaldProdMat="1"; varJefeDepto.Mail; varRegistroSaldProdMat.CorreoJefeDepto)
+                    DisplayMode: =View
+                    Height: =30
+                    HintText: ="Ingresa los apellidos Vo.Bo. JEFE DEPTO"
+                    Width: =Label8_50.Width
+                    X: =Label8_50.X
+                    Y: =Label8_50.Y+Label8_50.Height
+                    ZIndex: =2
+
+        Button5_1 As button:
+            AlignInContainer: =AlignInContainer.Stretch
+            DisplayMode: =If(varSaldProdMat="1", Edit, View)
+            Fill: |-
+                =If(varSaldProdMat="1",
+                    If(varSaldProdMat="1" && !IsBlank(varPersAlmacen), RGBA(54, 176, 75, 1), varSaldProdMat="1" && IsBlank(varPersAlmacen), RGBA(184, 0, 0, 1), RGBA(54, 176, 75, 1))/*;
+                    Switch(varRegistroSaldProdMat.StatusAlmacen;
+                        "En espera";
+                        RGBA(149; 149; 149; 1);
+                        "Autorizada";
+                        RGBA(54; 176; 75; 1);
+                        "Rechazada";
+                        RGBA(184; 0; 0; 1)
+                    )*/
+                )
+            HoverFill: =ColorFade(Self.Fill, -20%)
+            OnSelect: |-
+                =Reset(TextInput3);
+                Set(_titulo, "Personal Almacen");
+                Set(_bandPersAlmacen, true);
+            Text: |-
+                ="Elegir Personal Almacen"
+                /*
+                If(varSaldProdMat="1";
+                    "Elegir Personal Almacen";
+                    varRegistroSaldProdMat.StatusAlmacen & " Personal Almacen"
+                )
+                */
+            ZIndex: =6
+
+        Container2_32 As groupContainer.verticalAutoLayoutContainer:
+            FillPortions: =0
+            Height: =If(Screen_Registro_Salida_Prod_Mat.Size > 2, 80, 160)
+            LayoutDirection: =If(Screen_Index.Size > 2,LayoutDirection.Horizontal,LayoutDirection.Vertical)
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            Visible: =If(varSaldProdMat="1" && !IsBlank(varPersAlmacen), true, varSaldProdMat="1" && IsBlank(varPersAlmacen), false, true)
+            Width: =Parent.Width/2+Parent.Width/3
+            X: =113
+            Y: =256
+            ZIndex: =7
+
+            Container3_33 As groupContainer.verticalAutoLayoutContainer:
+                AlignInContainer: =AlignInContainer.Start
+                Height: =80
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinHeight: =80
+                LayoutMinWidth: =0
+                LayoutMode: =LayoutMode.Auto
+                PaddingLeft: =5
+                Width: =Container2_32.Width
+                ZIndex: =1
+
+                Label8_52 As label:
+                    FontWeight: =FontWeight.Bold
+                    Height: =30
+                    LayoutMinHeight: =0
+                    Text: ="Nombres personal almacen"
+                    Width: =If(Screen_Registro_Salida_Prod_Mat.Size > 2, Image1_23.Width/2-20, Image1_23.Width-20)
+                    X: =Image1_1.X
+                    Y: =Image1_1.Y+Image1_1.Height
+                    ZIndex: =1
+
+                txtNombre1_20 As text:
+                    BorderColor: =RGBA(0, 0, 0, 1)
+                    Clear: =true
+                    Default: =varPersAlmacen.DisplayName//If(varSaldProdMat="1"; varPersAlmacen.DisplayName; varRegistroSaldProdMat.NombreAlmacen)
+                    DisplayMode: =View
+                    Height: =30
+                    HintText: ="Ingresa los nombres de personal almacen"
+                    Width: =Label8_52.Width
+                    X: =Label8_52.X
+                    Y: =Label8_52.Y+Label8_52.Height
+                    ZIndex: =2
+
+            Container4_19 As groupContainer.verticalAutoLayoutContainer:
+                AlignInContainer: =AlignInContainer.Start
+                Height: =80
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinHeight: =100
+                LayoutMinWidth: =0
+                LayoutMode: =LayoutMode.Auto
+                PaddingLeft: =5
+                Width: =Container2_32.Width
+                ZIndex: =2
+
+                Label8_53 As label:
+                    FontWeight: =FontWeight.Bold
+                    Height: =30
+                    Text: ="Apellidos personal almacen"
+                    Width: =If(Screen_Registro_Salida_Prod_Mat.Size > 2,Image1_23.Width/2-20, Image1_23.Width-20)
+                    X: =If(Screen_Index.Size > 2,Label8_52.X+Label8_52.Width, Label8_52.X)
+                    Y: =If(Screen_Index.Size > 2, Label8_52.Y, txtNombre1_20.Y+Label8_53.Height)
+                    ZIndex: =1
+
+                txtApellidos1_11 As text:
+                    BorderColor: =RGBA(0, 0, 0, 1)
+                    Clear: =true
+                    Default: =varPersAlmacen.Mail//If(varSaldProdMat="1"; varPersAlmacen.Mail; varRegistroSaldProdMat.CorreoAlmacen)
+                    DisplayMode: =View
+                    Height: =30
+                    HintText: ="Ingresa los apellidos personal almacen"
+                    Width: =Label8_53.Width
+                    X: =Label8_53.X
+                    Y: =Label8_53.Y+Label8_53.Height
+                    ZIndex: =2
+
+        Button5_2 As button:
+            AlignInContainer: =AlignInContainer.Stretch
+            DisplayMode: =If(varSaldProdMat="1", Edit, View)
+            Fill: |-
+                =If(varSaldProdMat="1",
+                    If(varSaldProdMat="1" && !IsBlank(varPersGuardia), RGBA(54, 176, 75, 1), varSaldProdMat="1" && IsBlank(varPersGuardia), RGBA(184, 0, 0, 1), RGBA(54, 176, 75, 1))/*;
+                    Switch(varRegistroSaldProdMat.StatusGuardia;
+                        "En espera";
+                        RGBA(149; 149; 149; 1);
+                        "Autorizada";
+                        RGBA(54; 176; 75; 1);
+                        "Rechazada";
+                        RGBA(184; 0; 0; 1)
+                    )*/
+                )
+            HoverFill: =ColorFade(Self.Fill, -20%)
+            OnSelect: |-
+                =Reset(TextInput3);
+                Set(_titulo, "Personal Guardia");
+                Set(_bandPersGuardia, true);
+            Text: |-
+                ="Elegir Personal Guardia"
+                /*
+                If(varSaldProdMat="1";
+                    "Elegir Personal Guardia";
+                    varRegistroSaldProdMat.StatusJefeDepto & " Personal Guardia"
+                )
+                */
+            ZIndex: =8
+
+        Container2_34 As groupContainer.verticalAutoLayoutContainer:
+            FillPortions: =0
+            Height: =If(Screen_Registro_Salida_Prod_Mat.Size > 2, 80, 160)
+            LayoutDirection: =If(Screen_Index.Size > 2,LayoutDirection.Horizontal,LayoutDirection.Vertical)
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            Visible: =If(varSaldProdMat="1" && !IsBlank(varPersGuardia), true, varSaldProdMat="1" && IsBlank(varPersGuardia), false, true)
+            Width: =Parent.Width/2+Parent.Width/3
+            X: =113
+            Y: =256
+            ZIndex: =9
+
+            Container3_35 As groupContainer.verticalAutoLayoutContainer:
+                AlignInContainer: =AlignInContainer.Start
+                Height: =80
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinHeight: =80
+                LayoutMinWidth: =0
+                LayoutMode: =LayoutMode.Auto
+                PaddingLeft: =5
+                Width: =Container2_34.Width
+                ZIndex: =1
+
+                Label8_55 As label:
+                    FontWeight: =FontWeight.Bold
+                    Height: =30
+                    LayoutMinHeight: =0
+                    Text: ="Nombres personal guardia"
+                    Width: =If(Screen_Registro_Salida_Prod_Mat.Size > 2, Image1_23.Width/2-20, Image1_23.Width-20)
+                    X: =Image1_1.X
+                    Y: =Image1_1.Y+Image1_1.Height
+                    ZIndex: =1
+
+                txtNombre1_22 As text:
+                    BorderColor: =RGBA(0, 0, 0, 1)
+                    Clear: =true
+                    Default: =varPersGuardia.DisplayName//If(varSaldProdMat="1"; varPersGuardia.DisplayName; varRegistroSaldProdMat.NombreGuardia)
+                    DisplayMode: =View
+                    Height: =30
+                    HintText: ="Ingresa los nombres de personal guardia"
+                    Width: =Label8_55.Width
+                    X: =Label8_55.X
+                    Y: =Label8_55.Y+Label8_55.Height
+                    ZIndex: =2
+
+            Container4_20 As groupContainer.verticalAutoLayoutContainer:
+                AlignInContainer: =AlignInContainer.Start
+                Height: =80
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinHeight: =100
+                LayoutMinWidth: =0
+                LayoutMode: =LayoutMode.Auto
+                PaddingLeft: =5
+                Width: =Container2_34.Width
+                ZIndex: =2
+
+                Label8_56 As label:
+                    FontWeight: =FontWeight.Bold
+                    Height: =30
+                    Text: ="Correo personal guardia"
+                    Width: =If(Screen_Registro_Salida_Prod_Mat.Size > 2,Image1_23.Width/2-20, Image1_23.Width-20)
+                    X: =If(Screen_Index.Size > 2,Label8_55.X+Label8_55.Width, Label8_55.X)
+                    Y: =If(Screen_Index.Size > 2, Label8_55.Y, txtNombre1_22.Y+Label8_56.Height)
+                    ZIndex: =1
+
+                txtApellidos1_12 As text:
+                    BorderColor: =RGBA(0, 0, 0, 1)
+                    Clear: =true
+                    Default: =varPersGuardia.Mail//If(varSaldProdMat="1"; varPersGuardia.Mail; varRegistroSaldProdMat.CorreoGuardia)
+                    DisplayMode: =View
+                    Height: =30
+                    HintText: ="Ingresa los apellidos personal guardia"
+                    Width: =Label8_56.Width
+                    X: =Label8_56.X
+                    Y: =Label8_56.Y+Label8_56.Height
+                    ZIndex: =2
+
+    Group13 As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =10
+
+        Label50 As label:
+            Align: =Align.Center
+            Color: =RGBA(255, 255, 255, 1)
+            Fill: =If(First(colBandSalProdMat)._bandGeneral, RGBA(184, 0, 0, 1), RGBA(149, 149, 149, 1))
+            FontWeight: =FontWeight.Semibold
+            OnSelect: |-
+                =UpdateIf(colBandSalProdMat, true, { _bandGeneral: true, _bandArticulos: false })
+            Text: ="General"
+            X: =Image1_23.X
+            Y: =Image1_23.Y+Image1_23.Height
+            ZIndex: =8
+
+        Label50_1 As label:
+            Align: =Align.Center
+            Color: =RGBA(255, 255, 255, 1)
+            Fill: =If(First(colBandSalProdMat)._bandArticulos, RGBA(184, 0, 0, 1), RGBA(149, 149, 149, 1))
+            FontWeight: =FontWeight.Semibold
+            OnSelect: |-
+                =UpdateIf(colBandSalProdMat, true, { _bandGeneral: false, _bandArticulos: true })
+            Text: ="Articulos"
+            X: =Label50.X+Label50.Width
+            Y: =Image1_23.Y+Image1_23.Height
+            ZIndex: =9
+
+    "Gallery3 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
+        Height: =Parent.Height-Image1_23.Height-Label50_1.Height-Button5_6.Height-5
+        Items: =colArticulos
+        Layout: =Layout.Vertical
+        TemplatePadding: =0
+        TemplateSize: =Label50_2.Height*5+20
+        Visible: =First(colBandSalProdMat)._bandArticulos
+        Width: =If(Screen_Registro_Salida_Prod_Mat.Size > 2, Image1_23.Width, Parent.Width-20)
+        X: =Parent.Width/2-Self.Width/2
+        Y: =Button5_6.Y+Button5_6.Height+5
+        ZIndex: =11
+
+        Separator3 As rectangle:
+            Fill: =RGBA(0, 0, 0, 1)
+            Height: =1
+            OnSelect: =Select(Parent)
+            Width: =Parent.TemplateWidth
+            Y: =Parent.TemplateHeight - 1
+            ZIndex: =5
+
+        Label50_2 As label:
+            Align: =Align.Center
+            BorderColor: =RGBA(255, 255, 255, 1)
+            BorderThickness: =1
+            Color: =RGBA(255, 255, 255, 1)
+            Fill: =If(First(colBandSalProdMat)._bandArticulos, RGBA(184, 0, 0, 1), RGBA(149, 149, 149, 1))
+            FontWeight: =FontWeight.Semibold
+            OnSelect: |-
+                =UpdateIf(colBandSalProdMat, true, { _bandGeneral: false, _bandArticulos: true })
+            Size: =If(Screen_Registro_Salida_Prod_Mat.Size > 2, 13, 10)
+            Text: ="Código "
+            Width: =If(Screen_Registro_Salida_Prod_Mat.Size > 2, 150, 100)
+            ZIndex: =6
+
+        Label50_3 As label:
+            Align: =Align.Center
+            BorderColor: =RGBA(255, 255, 255, 1)
+            BorderThickness: =1
+            Color: =RGBA(255, 255, 255, 1)
+            Fill: =If(First(colBandSalProdMat)._bandArticulos, RGBA(184, 0, 0, 1), RGBA(149, 149, 149, 1))
+            FontWeight: =FontWeight.Semibold
+            OnSelect: |-
+                =UpdateIf(colBandSalProdMat, true, { _bandGeneral: false, _bandArticulos: true })
+            Size: =If(Screen_Registro_Salida_Prod_Mat.Size > 2, 13, 10)
+            Text: ="Descripción"
+            Width: =If(Screen_Registro_Salida_Prod_Mat.Size > 2, 150, 100)
+            X: =Label50_2.X
+            Y: =Label50_2.Y+Label50_2.Height
+            ZIndex: =7
+
+        Label50_4 As label:
+            Align: =Align.Center
+            BorderColor: =RGBA(255, 255, 255, 1)
+            BorderThickness: =1
+            Color: =RGBA(255, 255, 255, 1)
+            Fill: =If(First(colBandSalProdMat)._bandArticulos, RGBA(184, 0, 0, 1), RGBA(149, 149, 149, 1))
+            FontWeight: =FontWeight.Semibold
+            OnSelect: |-
+                =UpdateIf(colBandSalProdMat, true, { _bandGeneral: false, _bandArticulos: true })
+            Size: =If(Screen_Registro_Salida_Prod_Mat.Size > 2, 13, 10)
+            Text: ="Destino"
+            Width: =If(Screen_Registro_Salida_Prod_Mat.Size > 2, 150, 100)
+            X: =Label50_3.X
+            Y: =Label50_3.Y+Label50_3.Height
+            ZIndex: =8
+
+        Label50_5 As label:
+            Align: =Align.Center
+            BorderColor: =RGBA(255, 255, 255, 1)
+            BorderThickness: =1
+            Color: =RGBA(255, 255, 255, 1)
+            Fill: =If(First(colBandSalProdMat)._bandArticulos, RGBA(184, 0, 0, 1), RGBA(149, 149, 149, 1))
+            FontWeight: =FontWeight.Semibold
+            OnSelect: |-
+                =UpdateIf(colBandSalProdMat, true, { _bandGeneral: false, _bandArticulos: true })
+            Size: =If(Screen_Registro_Salida_Prod_Mat.Size > 2, 13, 10)
+            Text: ="Unidad"
+            Width: =If(Screen_Registro_Salida_Prod_Mat.Size > 2, 150, 100)
+            X: =Label50_4.X
+            Y: =Label50_4.Y+Label50_4.Height
+            ZIndex: =9
+
+        Label50_6 As label:
+            Align: =Align.Center
+            BorderColor: =RGBA(255, 255, 255, 1)
+            BorderThickness: =1
+            Color: =RGBA(255, 255, 255, 1)
+            Fill: =If(First(colBandSalProdMat)._bandArticulos, RGBA(184, 0, 0, 1), RGBA(149, 149, 149, 1))
+            FontWeight: =FontWeight.Semibold
+            OnSelect: |-
+                =UpdateIf(colBandSalProdMat, true, { _bandGeneral: false, _bandArticulos: true })
+            Size: =If(Screen_Registro_Salida_Prod_Mat.Size > 2, 13, 10)
+            Text: ="Cantidad"
+            Width: =If(Screen_Registro_Salida_Prod_Mat.Size > 2, 150, 100)
+            X: =Label50_5.X
+            Y: =Label50_5.Y+Label50_5.Height
+            ZIndex: =10
+
+        Icon8_2 As icon.Edit:
+            Color: =RGBA(0, 0, 0, 1)
+            Height: =40
+            Icon: =Icon.Edit
+            OnSelect: |-
+                =Set(varItemsSelectArt, ThisItem);
+                Set(_bandEditArticulos, true);
+            Visible: =varSaldProdMat="1"
+            Width: =40
+            X: =Label51.X+Label51.Width
+            ZIndex: =11
+
+        Icon9 As icon.Trash:
+            Color: =RGBA(0, 0, 0, 1)
+            Height: =40
+            Icon: =Icon.Trash
+            OnSelect: =Remove(colArticulos, ThisItem)
+            Visible: =varSaldProdMat="1"
+            Width: =40
+            X: =Icon8_2.X+Icon8_2.Width
+            ZIndex: =12
+
+        Label51 As label:
+            Text: =ThisItem.codigo//If(varSaldProdMat="1"; ThisItem.codigo; ThisItem.Codigo)
+            Width: =Parent.TemplateWidth-Label50_2.Width-Icon8_2.Width-Icon9.Width-20
+            X: =Label50_2.X+Label50_2.Width
+            Y: =Label50_2.Y
+            ZIndex: =13
+
+        Label51_1 As label:
+            Text: =ThisItem.descripcion//If(varSaldProdMat="1"; ThisItem.descripcion; ThisItem.Descripcion)
+            Width: =Parent.TemplateWidth-Label50_3.Width
+            X: =Label50_3.X+Label50_3.Width
+            Y: =Label50_3.Y
+            ZIndex: =14
+
+        Label51_2 As label:
+            Text: =ThisItem.destino//If(varSaldProdMat="1"; ThisItem.destino; ThisItem.Destino)
+            Width: =Parent.TemplateWidth-Label50_4.Width
+            X: =Label50_4.X+Label50_4.Width
+            Y: =Label50_4.Y
+            ZIndex: =15
+
+        Label51_3 As label:
+            Text: =ThisItem.unidad//If(varSaldProdMat="1"; ThisItem.unidad; ThisItem.Unidad)
+            Width: =Parent.TemplateWidth-Label50_5.Width
+            X: =Label50_5.X+Label50_5.Width
+            Y: =Label50_5.Y
+            ZIndex: =16
+
+        Label51_4 As label:
+            Text: =ThisItem.cantidad//If(varSaldProdMat="1"; ThisItem.cantidad; ThisItem.Cantidad)
+            Width: =Parent.TemplateWidth-Label50_6.Width
+            X: =Label50_6.X+Label50_6.Width
+            Y: =Label50_6.Y
+            ZIndex: =17
+
+    Button5_5 As button:
+        Fill: =RGBA(54, 176, 75, 1)
+        HoverFill: =ColorFade(Self.Fill, -20%)
+        OnSelect: |-
+            =If(IsBlank(Trim(txtNombre1_15.Text)) || IsBlank(Trim(txtApellidos1_9.Text)) || IsBlank(Trim(txtNombre1_16.Text)) || IsBlank(Trim(txtNombre1_17.Text)) || IsBlank(Trim(txtNombre1_24.Text)) || IsBlank(Trim(txtNombre1_18.Text)) || IsBlank(Trim(txtApellidos1_10.Text)) || IsBlank(Trim(txtNombre1_20.Text)) || IsBlank(Trim(txtApellidos1_11.Text)) || IsBlank(Trim(txtNombre1_22.Text)) || IsBlank(Trim(txtApellidos1_12.Text)),
+                Notify("Debes de ingresar todos los datos del formulario",NotificationType.Error),
+                UpdateIf(colBandSalProdMat, true, { _bandGeneral: false, _bandArticulos: true })
+            )
+        RadiusBottomLeft: =100
+        RadiusBottomRight: =100
+        RadiusTopLeft: =100
+        RadiusTopRight: =100
+        Size: =If(Screen_Registro_Salida_Prod_Mat.Size > 2, 15, 10)
+        Text: ="Siguiente"
+        Visible: =First(colBandSalProdMat)._bandGeneral
+        Width: =If(Screen_Registro_Salida_Prod_Mat.Size > 2, 150, 100)
+        X: =Container14_4.X+Container14_4.Width-Self.Width
+        Y: =Label50_1.Y+Label50_1.Height
+        ZIndex: =12
+
+    Button5_6 As button:
+        Fill: =RGBA(54, 176, 75, 1)
+        HoverFill: =ColorFade(Self.Fill, -20%)
+        OnSelect: |-
+            =If(CountRows(colArticulos)=0,
+                Notify("Debes de ingresar al menos un artículo",NotificationType.Error),
+                Reset(PenInput1_6);Set(varFirmaSolicitante, Blank());Set(varFirmaSolicitanteFinal, Blank());
+                Set(_bandFirmaSoli, true)
+            )
+        RadiusBottomLeft: =100
+        RadiusBottomRight: =100
+        RadiusTopLeft: =100
+        RadiusTopRight: =100
+        Size: =If(Screen_Registro_Salida_Prod_Mat.Size > 2, 15, 10)
+        Text: ="Registrar"
+        Visible: =If(varSaldProdMat="1", First(colBandSalProdMat)._bandArticulos, false)
+        Width: =If(Screen_Registro_Salida_Prod_Mat.Size > 2, 150, 100)
+        X: =Container14_4.X+Container14_4.Width-Self.Width
+        Y: =Label50_1.Y+Label50_1.Height
+        ZIndex: =13
+
+    Button5_7 As button:
+        Fill: =RGBA(184, 0, 0, 1)
+        HoverFill: =ColorFade(Self.Fill, -20%)
+        OnSelect: |
+            =
+            UpdateIf(colBandSalProdMat, true, { _bandGeneral: true, _bandArticulos: false })
+        RadiusBottomLeft: =100
+        RadiusBottomRight: =100
+        RadiusTopLeft: =100
+        RadiusTopRight: =100
+        Size: =If(Screen_Registro_Salida_Prod_Mat.Size > 2, 15, 10)
+        Text: ="Regresar"
+        Visible: =First(colBandSalProdMat)._bandArticulos
+        Width: =If(Screen_Registro_Salida_Prod_Mat.Size > 2, 150, 100)
+        X: =Button5_6.X-Button5_6.Width-5
+        Y: =Label50_1.Y+Label50_1.Height
+        ZIndex: =14
+
+    Icon10 As icon.Add:
+        Color: =RGBA(0, 0, 0, 1)
+        Height: =40
+        Icon: =Icon.Add
+        OnSelect: =Set(_bandAddArticulos, true);
+        Visible: =First(colBandSalProdMat)._bandArticulos && varSaldProdMat="1"
+        Width: =40
+        X: =Gallery3.X
+        Y: =Gallery3.Y-Self.Height
+        ZIndex: =15
+
+    Group7_27 As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =16
+
+        Image7_51 As image:
+            Height: =If(Screen_Registro_Salida_Prod_Mat.Size > 2, 50, 40)
+            Image: =BotónHome
+            Width: =If(Screen_Registro_Salida_Prod_Mat.Size > 2,50, 40)
+            X: =Parent.Width-Self.Width
+            Y: =20
+            ZIndex: =3
+
+        Icon1_44 As icon.Cancel:
+            Color: =RGBA(0, 0, 0, 0)
+            Height: =Image7_51.Height
+            Icon: =Icon.Cancel
+            OnSelect: =Navigate(Screen_Index,ScreenTransition.Cover)
+            Width: =Image7_51.Width
+            X: =Image7_51.X
+            Y: =Image7_51.Y
+            ZIndex: =4
+
+    Rectangle5 As rectangle:
+        Fill: =RGBA(255, 255, 255, 0.71)
+        Height: =Parent.Height
+        Visible: =_bandAddArticulos || _bandEditArticulos || _bandFirmaSoli || _bandSolicitante || _bandJefeDepto || _bandPersAlmacen || _bandPersGuardia
+        Width: =Parent.Width
+        ZIndex: =17
+
+    Group7_26 As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =17
+
+        Image7_50 As image:
+            Height: =If(Screen_Registro_Salida_Prod_Mat.Size > 2, 50, 40)
+            Image: =BotónAtrás
+            Width: =If(Screen_Registro_Salida_Prod_Mat.Size > 2, 50, 40)
+            Y: =20
+            ZIndex: =1
+
+        Icon1_43 As icon.Cancel:
+            Color: =RGBA(0, 0, 0, 0)
+            Height: =Image7_50.Height
+            Icon: =Icon.Cancel
+            OnSelect: =If(varSaldProdMat="2", Navigate(Screen_Registro_Salida_Prod_Mat,ScreenTransition.Cover), Navigate(Screen_Index, ScreenTransition.Cover))
+            Width: =Image7_50.Width
+            X: =Image7_50.X
+            Y: =Image7_50.Y
+            ZIndex: =2
+
+    Container6_3 As groupContainer.verticalAutoLayoutContainer:
+        BorderColor: =RGBA(235, 38, 44, 1)
+        BorderThickness: =2
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =Parent.Height-Label5.Height
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutGap: =5
+        LayoutMode: =LayoutMode.Auto
+        LayoutOverflowY: =LayoutOverflow.Scroll
+        PaddingLeft: =5
+        PaddingRight: =5
+        Visible: =_bandAddArticulos || _bandEditArticulos
+        Width: =If(Screen_Registro_Herra_Equip.Size > 2, Parent.Width/2, Parent.Width-20)
+        X: =Parent.Width/2-Self.Width/2
+        Y: =Label5.Y+Label5.Height
+        ZIndex: =18
+
+        Label7_36 As label:
+            AlignInContainer: =AlignInContainer.Stretch
+            FontWeight: =FontWeight.Semibold
+            Text: ="Código articulo"
+            Width: =0
+            X: =543
+            Y: =40
+            ZIndex: =1
+
+        txtCodigoArticulo As text:
+            AlignInContainer: =AlignInContainer.Stretch
+            BorderColor: =RGBA(0, 0, 0, 1)
+            Default: =If(_bandEditArticulos, varItemsSelectArt.codigo, "")
+            Width: =0
+            X: =543
+            Y: =45
+            ZIndex: =2
+
+        Label7_37 As label:
+            AlignInContainer: =AlignInContainer.Stretch
+            FontWeight: =FontWeight.Semibold
+            Text: ="Descripción"
+            Width: =0
+            X: =543
+            Y: =85
+            ZIndex: =3
+
+        txtDescArticulo As text:
+            AlignInContainer: =AlignInContainer.Stretch
+            BorderColor: =RGBA(0, 0, 0, 1)
+            Default: =If(_bandEditArticulos, varItemsSelectArt.descripcion, "")
+            Width: =0
+            X: =543
+            Y: =130
+            ZIndex: =4
+
+        Label7_38 As label:
+            AlignInContainer: =AlignInContainer.Stretch
+            FontWeight: =FontWeight.Semibold
+            Text: ="Destino"
+            Width: =0
+            X: =543
+            Y: =170
+            ZIndex: =5
+
+        txtDestinoArticulo As text:
+            AlignInContainer: =AlignInContainer.Stretch
+            BorderColor: =RGBA(0, 0, 0, 1)
+            Default: =If(_bandEditArticulos, varItemsSelectArt.destino, "")
+            Width: =0
+            X: =543
+            Y: =215
+            ZIndex: =6
+
+        Label7_39 As label:
+            AlignInContainer: =AlignInContainer.Stretch
+            FontWeight: =FontWeight.Semibold
+            Text: ="Unidad"
+            Width: =0
+            X: =543
+            Y: =255
+            ZIndex: =7
+
+        txtUnidadArticulo As text:
+            AlignInContainer: =AlignInContainer.Stretch
+            BorderColor: =RGBA(0, 0, 0, 1)
+            Default: =If(_bandEditArticulos, varItemsSelectArt.unidad, "")
+            Width: =0
+            X: =543
+            Y: =300
+            ZIndex: =8
+
+        Label7_40 As label:
+            AlignInContainer: =AlignInContainer.Stretch
+            FontWeight: =FontWeight.Semibold
+            Text: ="Cantidad"
+            Width: =0
+            X: =543
+            Y: =344
+            ZIndex: =9
+
+        txtCantidadArticulo As text:
+            AlignInContainer: =AlignInContainer.Stretch
+            BorderColor: =RGBA(0, 0, 0, 1)
+            Default: =If(_bandEditArticulos, varItemsSelectArt.cantidad, "")
+            Format: =TextFormat.Number
+            Width: =0
+            X: =543
+            Y: =389
+            ZIndex: =10
+
+        Label7_41 As label:
+            AlignInContainer: =AlignInContainer.Stretch
+            FontWeight: =FontWeight.Semibold
+            Height: =10
+            Text: =""
+            Width: =0
+            X: =543
+            Y: =344
+            ZIndex: =11
+
+        Button2_6 As button:
+            AlignInContainer: =AlignInContainer.Stretch
+            DisplayMode: =If(IsBlank(Trim(txtCodigoArticulo.Text)) || IsBlank(Trim(txtDescArticulo.Text)) || IsBlank(Trim(txtDestinoArticulo.Text)) || IsBlank(Trim(txtUnidadArticulo.Text)) || IsBlank(Trim(txtCantidadArticulo.Text)), Disabled, Edit)
+            Fill: =RGBA(54, 176, 75, 1)
+            HoverFill: =ColorFade(Self.Fill, -20%)
+            OnSelect: |+
+                =If(_bandAddArticulos,
+                    Collect(colArticulos, {index: CountRows(colArticulos)+1, codigo: txtCodigoArticulo.Text, descripcion: txtDescArticulo.Text, destino: txtDestinoArticulo.Text, unidad: txtUnidadArticulo.Text, cantidad: txtCantidadArticulo.Text}),
+                    UpdateIf(colArticulos, index=varItemsSelectArt.index, {codigo: Trim(txtCodigoArticulo.Text), descripcion: Trim(txtDescArticulo.Text), destino: Trim(txtDestinoArticulo.Text), unidad: Trim(txtUnidadArticulo.Text), cantidad: Trim(txtCantidadArticulo.Text) })
+                );
+                Reset(txtCodigoArticulo);
+                Reset(txtDescArticulo);
+                Reset(txtDestinoArticulo);
+                Reset(txtUnidadArticulo);
+                Reset(txtCantidadArticulo);
+                Set(_bandAddArticulos, false);
+                Set(_bandEditArticulos, false);
+                Set(_bandFirmaSoli, false);
+                    
+                
+                
+                
+            RadiusBottomLeft: =80
+            RadiusBottomRight: =80
+            RadiusTopLeft: =80
+            RadiusTopRight: =80
+            Text: =If(_bandEditArticulos, "Editar", "Agregar")
+            Width: =0
+            ZIndex: =12
+
+        Label7_42 As label:
+            AlignInContainer: =AlignInContainer.Stretch
+            FontWeight: =FontWeight.Semibold
+            Height: =10
+            Text: =""
+            Width: =0
+            X: =543
+            Y: =344
+            ZIndex: =13
+
+        Button2_7 As button:
+            AlignInContainer: =AlignInContainer.Stretch
+            Fill: =RGBA(184, 0, 0, 1)
+            HoverFill: =ColorFade(Self.Fill, -20%)
+            OnSelect: |-
+                =Reset(txtCodigoArticulo);
+                Reset(txtDescArticulo);
+                Reset(txtDestinoArticulo);
+                Reset(txtUnidadArticulo);
+                Reset(txtCantidadArticulo);
+                Set(_bandAddArticulos, false);
+                Set(_bandEditArticulos, false);
+            RadiusBottomLeft: =80
+            RadiusBottomRight: =80
+            RadiusTopLeft: =80
+            RadiusTopRight: =80
+            Text: ="Cancelar"
+            Width: =0
+            ZIndex: =14
+
+    Rectangle4_8 As rectangle:
+        BorderColor: =RGBA(0, 0, 0, 1)
+        BorderThickness: =1
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =300
+        Visible: =_bandFirmaSoli || _bandSolicitante
+        Width: =If(Screen_Registro_Salida_Prod_Mat.Size > 2, Parent.Width/3, Parent.Width-20)
+        X: =Parent.Width/2-Self.Width/2
+        Y: =Parent.Height/2-Self.Height/2
+        ZIndex: =20
+
+    Label9_9 As label:
+        Align: =Align.Center
+        FontWeight: =FontWeight.Semibold
+        Height: =50
+        Text: =If(_bandFirmaSoli, "Ingresa tu firma de soliciante", "¿Estás seguro de registrar tu solicitud?")
+        Visible: =_bandFirmaSoli || _bandSolicitante
+        Width: =Rectangle4_8.Width
+        X: =Rectangle4_8.X
+        Y: =Rectangle4_8.Y
+        ZIndex: =21
+
+    Image5_17 As image:
+        Height: =50
+        Image: =BotónIngresarFirma//If(varFirmaRec=PenInput1_6.Image; BotónFirmaAceptada; BotónIngresarFirma)
+        OnSelect: =Set(_bandFirma, true);Set(_bandFirmaSoli, false);
+        Visible: =_bandFirmaSoli
+        Width: =Label9_7.Width
+        X: =Label9_7.X
+        Y: =Rectangle4_8.Y+Rectangle4_8.Height/2-Self.Height/2
+        ZIndex: =22
+
+    Button7_18 As button:
+        Fill: =RGBA(184, 0, 0, 1)
+        HoverFill: =ColorFade(Self.Fill, -20%)
+        OnSelect: =Set(_bandFirmaSoli, false);
+        RadiusBottomLeft: =100
+        RadiusBottomRight: =100
+        RadiusTopLeft: =100
+        RadiusTopRight: =100
+        Text: ="Cancelar"
+        Visible: =_bandFirmaSoli
+        X: =Parent.Width/2-Self.Width/2
+        Y: =Image5_17.Y+Image5_17.Height+20
+        ZIndex: =28
+
+    Group8_3 As group:
+        Height: =5
+        Width: =5
+        X: =80
+        Y: =40
+        ZIndex: =28
+
+        Rectangle1_7 As rectangle:
+            Fill: =RGBA(237, 125, 49, 0.57)
+            Height: =Parent.Height
+            Visible: =_bandFirma || _bandFirmaConfirm
+            Width: =Parent.Width
+            ZIndex: =23
+
+        Label4_13 As label:
+            Align: =Align.Center
+            Color: =RGBA(255, 255, 255, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =90
+            Size: =If(Screen_Index.Size > 2, 30, 15)
+            Text: =If(_bandFirmaConfirm, "Firma", "Firma en el recuadro blanco")
+            Visible: =_bandFirma
+            Width: =Parent.Width
+            Y: =PenInput1_6.Y-Label4_13.Height
+            ZIndex: =24
+
+        Image6_17 As image:
+            Height: =50
+            Image: =BotónAceptar
+            OnSelect: |-
+                =If(varFirmaSolicitante=PenInput1_6.Image,
+                    Set(_bandSolicitante, true);
+                    Set(_bandFirmaSoli, false);
+                    Set(varFirmaSolicitanteFinal, JSON(varFirmaSolicitante,JSONFormat.IncludeBinaryData));
+                    Set(_bandFirma, false),
+                    Set(_bandSolicitante, false);
+                    Set(_bandFirma, false);
+                    Set(_bandFirmaSoli, true);
+                    Set(varFirmaSolicitanteFinal, Blank());
+                )
+            Visible: =_bandFirma
+            Width: =50
+            X: =PenInput1_6.X+PenInput1_6.Width-Image6_17.Width*2-20
+            Y: =PenInput1_6.Y+PenInput1_6.Height+10
+            ZIndex: =25
+
+        Image6_18 As image:
+            Height: =50
+            Image: =BotónCancelar
+            OnSelect: =Reset(PenInput1_6);Set(_bandFirma, false);Set(_bandFirmaSoli, true);
+            Visible: =_bandFirma
+            Width: =50
+            X: =PenInput1_6.X+PenInput1_6.Width-Image6_18.Width
+            Y: =PenInput1_6.Y+PenInput1_6.Height+10
+            ZIndex: =26
+
+        PenInput1_6 As inkControl:
+            Fill: =RGBA(255, 255, 255, 1)
+            OnSelect: =Set(varFirmaSolicitante, Self.Image);
+            Reset: =true
+            Visible: =_bandFirma
+            Width: =If(Screen_Index.Size > 2, Parent.Width/2, Parent.Width-10)
+            X: =Parent.Width/2-PenInput1_6.Width/2
+            Y: =Parent.Height/2-PenInput1_6.Height/2
+            ZIndex: =27
+
+    Button7_21 As button:
+        Fill: =RGBA(54, 176, 75, 1)
+        HoverFill: =ColorFade(Self.Fill, -20%)
+        OnSelect: |
+            =Set(varDGSaldProdMat, 
+                Patch(RegiSalidaProdMat, Defaults(RegiSalidaProdMat),
+                    {
+                        Title: "PM-",
+                        NombreSolicitante: txtNombre1_15.Text,
+                        ApellidosSolicitante: txtApellidos1_9.Text,
+                        CorreoSolicitante:  txtNombre1_16.Text,
+                        FirmaSolicitante: varFirmaSolicitanteFinal,
+                        UnidadOperativa: txtNombre1_24.Text,
+                        Almacen: txtNombre1_17.Text,
+                        NombreJefeDepto: txtNombre1_18.Text,
+                        CorreoJefeDepto: txtApellidos1_10.Text,
+                        NombreAlmacen: txtNombre1_20.Text,
+                        CorreoAlmacen: txtApellidos1_11.Text,
+                        NombreGuardia: txtNombre1_22.Text,
+                        CorreoGuardia:txtApellidos1_12.Text,
+                        Fecha: Text(Now(), "dd-mm-yyyy")            
+                    }
+                )
+            );
+            UpdateIf(RegiSalidaProdMat, ID=varDGSaldProdMat.ID, { Title: "PM-"&varDGSaldProdMat.ID });
+            ForAll(colArticulos,
+                Collect(RegArticulos, { Title: Text(varDGSaldProdMat.ID), Codigo: colArticulos[@codigo], Descripcion: colArticulos[@descripcion], Destino: colArticulos[@destino], Unidad: colArticulos[@unidad], Cantidad: colArticulos[@cantidad] })
+            );
+            
+            ClearCollect(colDatosPrincipales, {
+                Title: varDGSaldProdMat.Title,
+                NombreSolicitante: varDGSaldProdMat.NombreSolicitante,
+                ApellidosSolicitante: varDGSaldProdMat.ApellidosSolicitante,
+                CorreoSolicitante:  varDGSaldProdMat.CorreoSolicitante,
+                UnidadOperativa: varDGSaldProdMat.UnidadOperativa,
+                Almacen: varDGSaldProdMat.Almacen,
+                NombreJefeDepto: varDGSaldProdMat.NombreJefeDepto,
+                CorreoJefeDepto: varDGSaldProdMat.CorreoJefeDepto,
+                NombreAlmacen: varDGSaldProdMat.NombreAlmacen,
+                CorreoAlmacen: varDGSaldProdMat.CorreoAlmacen,
+                NombreGuardia: varDGSaldProdMat.NombreGuardia,
+                CorreoGuardia: varDGSaldProdMat.CorreoGuardia,
+                Fecha: varDGSaldProdMat.Fecha
+            });
+            
+            Set(_bandSolicitante, false);
+            Navigate(Screen_Confirm_Salida_Prod_Mat,ScreenTransition.Cover);
+        RadiusBottomLeft: =100
+        RadiusBottomRight: =100
+        RadiusTopLeft: =100
+        RadiusTopRight: =100
+        Text: ="Registrar"
+        Visible: =_bandSolicitante
+        X: =Parent.Width/2-Self.Width/2
+        Y: =Rectangle4_8.Y+Rectangle4_8.Height/2-Self.Height/2
+        ZIndex: =29
+
+    Button7_22 As button:
+        Fill: =RGBA(184, 0, 0, 1)
+        HoverFill: =ColorFade(Self.Fill, -20%)
+        OnSelect: =Set(_bandSolicitante, false);
+        RadiusBottomLeft: =100
+        RadiusBottomRight: =100
+        RadiusTopLeft: =100
+        RadiusTopRight: =100
+        Text: ="Cancelar"
+        Visible: =_bandSolicitante
+        X: =Parent.Width/2-Self.Width/2
+        Y: =Button7_21.Y+Button7_21.Height*2
+        ZIndex: =30
+
+    Group4_2 As group:
+        Height: =5
+        Width: =5
+        X: =60
+        Y: =32
+        ZIndex: =31
+
+        TextInput3 As text:
+            BorderColor: =RGBA(0, 0, 0, 1)
+            Default: =""
+            Height: =38
+            HintText: ="Búsqueda de usuarios"
+            HoverBorderColor: =RGBA(0, 0, 0, 1)
+            HoverFill: =RGBA(140, 197, 66, 1)
+            Visible: =_bandJefeDepto || _bandPersAlmacen || _bandPersGuardia
+            Width: =Gallery2_2.Width-Icon3_2.Width-10
+            X: =Gallery2_2.X+Gallery2_2.Width-TextInput3.Width
+            Y: =Label5_4.Y+Label5_4.Height
+            ZIndex: =33
+
+        Icon3_2 As icon.Search:
+            BorderColor: =RGBA(131, 24, 75, 1)
+            Color: =RGBA(0, 0, 0, 1)
+            Height: =38
+            Icon: =Icon.Search
+            Visible: =_bandJefeDepto || _bandPersAlmacen || _bandPersGuardia
+            Width: =38
+            X: =Gallery2_2.X
+            Y: =Label5_4.Y+Label5_4.Height
+            ZIndex: =34
+
+    "Gallery2_2 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
+        BorderColor: =RGBA(0, 0, 0, 1)
+        BorderThickness: =1
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =Parent.Height/2+Parent.Height/3-50
+        Items: |-
+            =Filter(UsuariosdeOffice365.SearchUser({searchTerm:Trim(TextInput3.Text), top:15}),EndsWith(Mail,"overcastmx.com") || DisplayName)//UsuariosdeOffice365.SearchUser({searchTerm:TextInput3.Text})
+        Layout: =Layout.Vertical
+        TemplatePadding: =0
+        TemplateSize: =96
+        Visible: =_bandJefeDepto || _bandPersAlmacen || _bandPersGuardia
+        Width: =If(Screen_Registro_Salida_Prod_Mat.Size > 2, Parent.Width/3, Parent.Width-50)
+        X: =Parent.Width/2-Gallery2_2.Width/2
+        Y: =TextInput3.Y+TextInput3.Height+10
+        ZIndex: =32
+
+        Icon4_1 As icon.Check:
+            BorderColor: =RGBA(131, 24, 75, 1)
+            Color: =RGBA(0, 0, 0, 0)
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =95
+            Icon: =Icon.Check
+            OnSelect: =
+            Width: =450
+            ZIndex: =1
+
+        Image23 As image:
+            BorderColor: =RGBA(131, 24, 75, 1)
+            Height: =If(Screen_Registro_Salida_Prod_Mat.Size > 3, 50, 30)
+            Image: =grifo
+            OnSelect: =Select(Parent)
+            Visible: =If(Screen_Registro_Salida_Prod_Mat.Size > 3, true, false)
+            Width: =If(Screen_Registro_Salida_Prod_Mat.Size > 3, 50, 30)
+            X: =Parent.TemplateWidth - Self.Width - 20
+            Y: =10
+            ZIndex: =2
+
+        Separator1_3 As rectangle:
+            BorderColor: =RGBA(131, 24, 75, 1)
+            Fill: =RGBA(131, 24, 75, 1)
+            Height: =1
+            OnSelect: =Select(Parent)
+            Width: =Parent.TemplateWidth
+            Y: =Parent.TemplateHeight - 1
+            ZIndex: =3
+
+        Label4_3 As label:
+            BorderColor: =RGBA(131, 24, 75, 1)
+            FontWeight: =FontWeight.Semibold
+            Height: =36
+            OnSelect: =Select(Parent)
+            Text: =ThisItem.DisplayName
+            Width: =326
+            X: =74
+            Y: =11
+            ZIndex: =4
+
+        Image22 As image:
+            BorderColor: =RGBA(131, 24, 75, 1)
+            Height: =If(Screen_Registro_Salida_Prod_Mat.Size > 3, 50, 30)
+            Image: |-
+                =If(Not(IsBlank(ThisItem.Id)) && UsuariosdeOffice365.UserPhotoMetadata(ThisItem.Id).HasPhoto,
+                    UsuariosdeOffice365.UserPhoto(ThisItem.Id),
+                    SampleImage
+                )
+            OnSelect: =Select(Parent)
+            RadiusBottomLeft: =80
+            RadiusBottomRight: =80
+            RadiusTopLeft: =80
+            RadiusTopRight: =80
+            Width: =If(Screen_Registro_Salida_Prod_Mat.Size > 3, 50, 30)
+            X: =10
+            Y: =17
+            ZIndex: =5
+
+        Label4_5 As label:
+            BorderColor: =RGBA(131, 24, 75, 1)
+            Height: =36
+            OnSelect: =Select(Parent)
+            Text: =ThisItem.Mail
+            Width: =326
+            X: =74
+            Y: =47
+            ZIndex: =6
+
+        NextArrow1_1 As icon.ChevronRight:
+            AccessibleLabel: =Self.Tooltip
+            BorderColor: =RGBA(131, 24, 75, 1)
+            Color: =RGBA(0, 0, 0, 0)
+            Height: =Parent.TemplateHeight
+            Icon: =Icon.ChevronRight
+            OnSelect: |
+                =If(_bandJefeDepto,
+                    Set(varJefeDepto, ThisItem);
+                    Set(_bandJefeDepto, false)
+                    ,
+                    _bandPersAlmacen,
+                    Set(varPersAlmacen, ThisItem);
+                    Set(_bandPersAlmacen, false)
+                    ,
+                    _bandPersGuardia,
+                    Set(varPersGuardia, ThisItem);
+                    Set(_bandPersGuardia, false)
+                )
+                
+                
+                /*
+                Set(_contContactoOp; CountRows(Filter(colContactosOper;email=ThisItem.Mail)));;
+                
+                If(ThisItem.Mail<>_userEmail;
+                    If(_popUpGerOper; 
+                        If(ThisItem.Mail=_JefInmedi; 
+                            Notify("Este usuario ya está asignado como jefe inmediato";NotificationType.Error);
+                            //_contContactoOp<>0;
+                            //Notify("Este usuario ya está asignado como contacto de operación";NotificationType.Error);
+                            Set(_GerOper; ThisItem.Mail);;
+                            Set(GerOper; ThisItem);;
+                            Set(_popUpGerOper; false);;
+                            Set(_popUpJefInmedi; false);;
+                            Reset(TextInput3);;
+                        );;    
+                    );
+                    Notify("No puedes asignarte como autorizador";NotificationType.Error)
+                );;
+                
+                
+                If(ThisItem.Mail<>_userEmail;
+                    If(_popUpJefInmedi; 
+                        If(ThisItem.Mail=_GerOper; 
+                            Notify("Este usuario ya está asignado como gerente de operación";NotificationType.Error);
+                            _contContactoOp<>0;
+                            Notify("Este usuario ya está asignado como contacto de operación";NotificationType.Error);
+                            Set(_JefInmedi; ThisItem.Mail);;
+                            Set(JefInmedi; ThisItem);;
+                            Set(_popUpGerOper; false);;
+                            Set(_popUpJefInmedi; false);;
+                            Reset(TextInput3);;
+                        );;    
+                    );
+                    Notify("No puedes asignarte como autorizador";NotificationType.Error)
+                );;
+                */
+            PaddingBottom: =10
+            PaddingLeft: =10
+            PaddingRight: =10
+            PaddingTop: =10
+            TabIndex: =0
+            Tooltip: ="Ver los detalles del elemento"
+            Width: =Parent.TemplateWidth
+            ZIndex: =7
+
+    Label5_4 As label:
+        Align: =Align.Center
+        BorderColor: =RGBA(131, 24, 75, 1)
+        FontWeight: =FontWeight.Semibold
+        Height: =36
+        Text: =_titulo
+        Visible: =_bandJefeDepto || _bandPersAlmacen || _bandPersGuardia
+        Width: =Gallery2_2.Width
+        X: =Gallery2_2.X
+        Y: =60
+        ZIndex: =35
+
+    Icon2_2 As icon.CancelBadge:
+        BorderColor: =RGBA(131, 24, 75, 1)
+        Color: =RGBA(0, 0, 0, 1)
+        Height: =If(Screen_Registro_Salida_Prod_Mat.Size > 3, 50, 30)
+        Icon: =Icon.CancelBadge
+        OnSelect: |-
+            =Set(_bandJefeDepto, false);
+            Set(_bandPersAlmacen, false);
+            Set(_bandPersGuardia, false);
+        Visible: =_bandJefeDepto || _bandPersAlmacen || _bandPersGuardia
+        Width: =If(Screen_Registro_Salida_Prod_Mat.Size > 3, 50, 30)
+        X: =TextInput3.X+TextInput3.Width-Icon2_2.Width
+        Y: =TextInput3.Y-Icon2_2.Height-10
+        ZIndex: =36
+

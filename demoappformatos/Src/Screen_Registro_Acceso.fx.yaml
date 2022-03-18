@@ -1,0 +1,1050 @@
+Screen_Registro_Acceso As screen:
+    BackgroundImage: =PantallaCel3
+    ImagePosition: =ImagePosition.Stretch
+    OnVisible: |-
+        =Refresh(RegIngreProvContr);
+        Set(_bandRegisAcceso, false);
+        Reset(Radio1_1);
+        Reset(txtCorreo);
+        Reset(txtNombre);
+        Reset(txtCompania);
+        Reset(txtRespProyecto);
+        Reset(txtAreaAsign);
+        Reset(txtMarcaVehic);
+        Reset(txtPlacas);
+        Reset(txtUnidadOperativa);
+
+    Image1_1 As image:
+        Height: =If(Screen_Registro_Acceso.Size > 2, 100, 100)
+        Image: =EncabezadoPantallaCel1
+        ImagePosition: =ImagePosition.Fill
+        Width: =Parent.Width/2+Parent.Width/3
+        X: =Parent.Width/2-Self.Width/2
+        ZIndex: =3
+
+    Button1_1 As button:
+        DisplayMode: =DisplayMode.View
+        Fill: =RGBA(235, 38, 44, 1)
+        Height: =80
+        Size: =If(Screen_Index.Size > 2, 30, 15)
+        Text: ="Registro"
+        Width: =If(Screen_Index.Size > 2, Parent.Width/3, Parent.Width/2) 
+        X: =Parent.Width/2-Self.Width/2
+        Y: =(Image1_1.Y+Image1_1.Height)/2-Button1_1.Height/2
+        ZIndex: =4
+
+    Label1_1 As label:
+        Height: =100
+        Text: =""
+        Width: =10
+        X: =Parent.Width/2-Label1_1.Width/2
+        Y: =(Parent.Height+Image1.Height)/2-Image2.Height/2
+        ZIndex: =5
+
+    Container1 As groupContainer.verticalAutoLayoutContainer:
+        Height: =Parent.Height-Image1_1.Height
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutMode: =LayoutMode.Auto
+        LayoutOverflowY: =LayoutOverflow.Scroll
+        Width: =Parent.Width/2+Parent.Width/3
+        X: =Parent.Width/2-Self.Width/2
+        Y: =Image1_1.Y+Image1_1.Height
+        ZIndex: =6
+
+        Container2_6 As groupContainer.verticalAutoLayoutContainer:
+            FillPortions: =0
+            Height: =If(Screen_Index.Size > 2, 30, 60)
+            LayoutDirection: =If(Screen_Registro_Acceso.Size > 2,LayoutDirection.Horizontal,LayoutDirection.Vertical)
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            Width: =Parent.Width/2+Parent.Width/3
+            X: =113
+            Y: =256
+            ZIndex: =1
+
+            Container3_6 As groupContainer.verticalAutoLayoutContainer:
+                Height: =Value(Label10.Text)
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinHeight: =Value(Label10.Text)
+                LayoutMinWidth: =0
+                LayoutMode: =LayoutMode.Auto
+                LayoutWrap: =true
+                PaddingLeft: =5
+                Width: =Container2_6.Width
+                ZIndex: =1
+
+                Label8_8 As label:
+                    FontWeight: =FontWeight.Bold
+                    Height: =30
+                    LayoutMinHeight: =0
+                    Text: |-
+                        =If(Radio1_1.Selected.Value="Proveedor" || Radio1_1.Selected.Value="Contratista", "Código: DRH-FR-PDI-002", "Código: DRH-FR-PDI-005")
+                    Width: =If(Screen_Index.Size > 2, Image1_1.Width/2, Image1_1.Width-10)
+                    X: =Image1_1.X
+                    Y: =Image1_1.Y+Image1_1.Height
+                    ZIndex: =1
+
+        Container2_5 As groupContainer.verticalAutoLayoutContainer:
+            FillPortions: =0
+            Height: =If(Screen_Index.Size > 2, 50, 150)
+            LayoutDirection: =If(Screen_Index.Size > 2,LayoutDirection.Horizontal,LayoutDirection.Vertical)
+            LayoutMinHeight: =100
+            LayoutMinWidth: =0
+            LayoutMode: =LayoutMode.Auto
+            Width: =Parent.Width/2+Parent.Width/3
+            X: =113
+            Y: =256
+            ZIndex: =2
+
+            Radio1_1 As radio:
+                BorderColor: =RGBA(0, 0, 0, 1)
+                Default: ="Proveedor"
+                FillPortions: =1
+                Height: =If(Screen_Index.Size > 2, 50, 150)
+                HoverColor: =RGBA(0, 0, 0, 1)
+                Items: =["Proveedor", "Contratista", "Visitante"]
+                Layout: =If(Screen_Index.Size > 2, Layout.Horizontal, Layout.Vertical)
+                LayoutMinWidth: =0
+                PaddingBottom: =0
+                PaddingTop: =0
+                RadioBorderColor: =RGBA(0, 0, 0, 1)
+                Width: =440
+                X: =Image1_1.X
+                Y: =
+                ZIndex: =1
+
+        Container2_11 As groupContainer.verticalAutoLayoutContainer:
+            FillPortions: =0
+            Height: =If(Screen_Index.Size > 2, 80, 160)
+            LayoutDirection: =If(Screen_Index.Size > 2,LayoutDirection.Horizontal,LayoutDirection.Vertical)
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            Width: =Parent.Width/2+Parent.Width/3
+            X: =113
+            Y: =256
+            ZIndex: =3
+
+            Container3_9 As groupContainer.verticalAutoLayoutContainer:
+                AlignInContainer: =AlignInContainer.Start
+                Height: =80
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinHeight: =80
+                LayoutMinWidth: =0
+                LayoutMode: =LayoutMode.Auto
+                PaddingLeft: =5
+                Width: =Container2_11.Width
+                ZIndex: =1
+
+                Label8_3 As label:
+                    AlignInContainer: =AlignInContainer.Stretch
+                    FontWeight: =FontWeight.Bold
+                    Height: =30
+                    LayoutMinHeight: =0
+                    Text: ="¿Eres mayor de edad?"
+                    Width: =If(Screen_Index.Size > 2, Image1_1.Width/2-20, Image1_1.Width-20)
+                    X: =Image1_1.X
+                    Y: =Image1_1.Y+Image1_1.Height
+                    ZIndex: =1
+
+                Radio1_3 As radio:
+                    AlignInContainer: =AlignInContainer.Stretch
+                    BorderColor: =RGBA(0, 0, 0, 1)
+                    Default: ="Sí"
+                    Height: =If(Screen_Index.Size > 2, 50, 150)
+                    HoverColor: =RGBA(0, 0, 0, 1)
+                    Items: =["Sí", "No"]
+                    Layout: =If(Screen_Index.Size > 2, Layout.Horizontal, Layout.Vertical)
+                    LayoutMinWidth: =0
+                    PaddingBottom: =0
+                    PaddingTop: =0
+                    RadioBorderColor: =RGBA(0, 0, 0, 1)
+                    Width: =440
+                    X: =Image1_1.X
+                    Y: =
+                    ZIndex: =2
+
+        Container2_12 As groupContainer.verticalAutoLayoutContainer:
+            FillPortions: =0
+            Height: =If(Screen_Index.Size > 2, 80, 160)
+            LayoutDirection: =If(Screen_Index.Size > 2,LayoutDirection.Horizontal,LayoutDirection.Vertical)
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            Width: =Parent.Width/2+Parent.Width/3
+            X: =113
+            Y: =256
+            ZIndex: =4
+
+            Container3_10 As groupContainer.verticalAutoLayoutContainer:
+                AlignInContainer: =AlignInContainer.Start
+                Height: =80
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinHeight: =80
+                LayoutMinWidth: =0
+                LayoutMode: =LayoutMode.Auto
+                PaddingLeft: =5
+                PaddingRight: =10
+                Width: =Container2_12.Width
+                ZIndex: =1
+
+                Label8_13 As label:
+                    FontWeight: =FontWeight.Bold
+                    Height: =30
+                    LayoutMinHeight: =0
+                    Text: ="Sexo"
+                    Width: =If(Screen_Index.Size > 2, Image1_1.Width/2-20, Image1_1.Width-20)
+                    X: =Image1_1.X
+                    Y: =Image1_1.Y+Image1_1.Height
+                    ZIndex: =1
+
+                Cbsexo As dropdown:
+                    AlignInContainer: =AlignInContainer.Start
+                    BorderColor: =RGBA(0, 0, 0, 1)
+                    ChevronBackground: =RGBA(184, 0, 0, 1)
+                    ChevronHoverBackground: =ColorFade(Self.Fill, -20%)
+                    Items: =["Masculino", "Femenino"]
+                    LayoutMinWidth: =0
+                    SelectionFill: =RGBA(184, 0, 0, 1)
+                    Width: =Label8_13.Width
+                    ZIndex: =2
+
+            Container4_1 As groupContainer.verticalAutoLayoutContainer:
+                AlignInContainer: =AlignInContainer.Start
+                Height: =80
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinHeight: =100
+                LayoutMinWidth: =0
+                LayoutMode: =LayoutMode.Auto
+                PaddingLeft: =5
+                Visible: =Radio1_3.Selected.Value="No"
+                Width: =Container2_12.Width
+                ZIndex: =2
+
+                Label8_14 As label:
+                    FontWeight: =FontWeight.Bold
+                    Height: =30
+                    Text: ="Edad"
+                    Width: =If(Screen_Index.Size > 2,Image1_1.Width/2-20, Image1_1.Width-20)
+                    X: =If(Screen_Index.Size > 2,Label8_13.X+Label8_13.Width, Label8_13.X)
+                    ZIndex: =1
+
+                txtEdad As text:
+                    BorderColor: =RGBA(0, 0, 0, 1)
+                    Clear: =true
+                    Default: =""
+                    Format: =TextFormat.Number
+                    Height: =30
+                    HintText: ="Ingresa tu edad"
+                    Width: =Label8_14.Width
+                    X: =Label8_14.X
+                    Y: =Label8_14.Y+Label8_14.Height
+                    ZIndex: =2
+
+        Container2_8 As groupContainer.verticalAutoLayoutContainer:
+            FillPortions: =0
+            Height: =If(Screen_Index.Size > 2, 80, 80)
+            LayoutDirection: =If(Screen_Index.Size > 2,LayoutDirection.Horizontal,LayoutDirection.Vertical)
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            Width: =Parent.Width/2+Parent.Width/3
+            X: =113
+            Y: =256
+            ZIndex: =5
+
+            Container3_7 As groupContainer.verticalAutoLayoutContainer:
+                AlignInContainer: =AlignInContainer.Start
+                Height: =80
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinHeight: =80
+                LayoutMinWidth: =0
+                LayoutMode: =LayoutMode.Auto
+                PaddingLeft: =5
+                Width: =Container2_8.Width
+                ZIndex: =1
+
+                Label8_12 As label:
+                    FontWeight: =FontWeight.Bold
+                    Height: =30
+                    LayoutMinHeight: =0
+                    Text: ="Unidad operativa"
+                    Width: =If(Screen_Index.Size > 2, Image1_1.Width/2-20, Image1_1.Width-20)
+                    X: =Image1_1.X
+                    Y: =Image1_1.Y+Image1_1.Height
+                    ZIndex: =1
+
+                txtUnidadOperativa As text:
+                    BorderColor: =RGBA(0, 0, 0, 1)
+                    Clear: =true
+                    Default: =""
+                    Height: =30
+                    HintText: ="Ingresa tu unidad operativa"
+                    Width: =Label8_12.Width
+                    X: =Label8_12.X
+                    Y: =Label8_12.Y+Label8_12.Height
+                    ZIndex: =2
+
+        Container2 As groupContainer.verticalAutoLayoutContainer:
+            FillPortions: =0
+            Height: =If(Screen_Registro_Acceso.Size > 2, 80, 160)
+            LayoutDirection: =If(Screen_Index.Size > 2,LayoutDirection.Horizontal,LayoutDirection.Vertical)
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            Width: =Parent.Width/2+Parent.Width/3
+            X: =113
+            Y: =256
+            ZIndex: =6
+
+            Container3 As groupContainer.verticalAutoLayoutContainer:
+                AlignInContainer: =AlignInContainer.Start
+                Height: =80
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinHeight: =80
+                LayoutMinWidth: =0
+                LayoutMode: =LayoutMode.Auto
+                PaddingLeft: =5
+                Width: =Container2.Width
+                ZIndex: =1
+
+                Label8 As label:
+                    FontWeight: =FontWeight.Bold
+                    Height: =30
+                    LayoutMinHeight: =0
+                    Text: ="Correo  electrónico"
+                    Width: =If(Screen_Index.Size > 2, Image1_1.Width/2-20, Image1_1.Width-20)
+                    X: =Image1_1.X
+                    Y: =Image1_1.Y+Image1_1.Height
+                    ZIndex: =1
+
+                txtCorreo As text:
+                    BorderColor: =RGBA(0, 0, 0, 1)
+                    Clear: =true
+                    Default: =""
+                    Height: =30
+                    HintText: ="Ingresa tu correo  electrónico"
+                    Width: =Label8.Width
+                    X: =Label8.X
+                    Y: =Label8.Y+Label8.Height
+                    ZIndex: =2
+
+            Container4 As groupContainer.verticalAutoLayoutContainer:
+                AlignInContainer: =AlignInContainer.Start
+                Height: =80
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinHeight: =100
+                LayoutMinWidth: =0
+                LayoutMode: =LayoutMode.Auto
+                PaddingLeft: =5
+                Width: =Container2.Width
+                ZIndex: =2
+
+                Label8_1 As label:
+                    FontWeight: =FontWeight.Bold
+                    Height: =30
+                    Text: ="Nombre"
+                    Width: =If(Screen_Index.Size > 2,Image1_1.Width/2-20, Image1_1.Width-20)
+                    X: =If(Screen_Index.Size > 2,Label8.X+Label8.Width, Label8.X)
+                    Y: =If(Screen_Index.Size > 2, Label8.Y, txtCorreo.Y+Label8_1.Height)
+                    ZIndex: =1
+
+                txtNombre As text:
+                    BorderColor: =RGBA(0, 0, 0, 1)
+                    Clear: =true
+                    Default: =""
+                    Height: =30
+                    HintText: ="Ingresa tu nombre"
+                    Width: =Label8_1.Width
+                    X: =Label8_1.X
+                    Y: =Label8_1.Y+Label8_1.Height
+                    ZIndex: =2
+
+        Container2_1 As groupContainer.verticalAutoLayoutContainer:
+            FillPortions: =0
+            Height: =If(Screen_Index.Size > 2, 80, 160)
+            LayoutDirection: =If(Screen_Index.Size > 2,LayoutDirection.Horizontal,LayoutDirection.Vertical)
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            Width: =Parent.Width/2+Parent.Width/3
+            X: =113
+            Y: =256
+            ZIndex: =7
+
+            Container3_1 As groupContainer.verticalAutoLayoutContainer:
+                AlignInContainer: =AlignInContainer.Start
+                Height: =80
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinHeight: =80
+                LayoutMinWidth: =0
+                LayoutMode: =LayoutMode.Auto
+                PaddingLeft: =5
+                Width: =Container2_1.Width
+                ZIndex: =1
+
+                Label8_2 As label:
+                    FontWeight: =FontWeight.Bold
+                    Height: =30
+                    LayoutMinHeight: =0
+                    Text: =If(Radio1_1.Selected.Value<>"Visitante", "Compañía", "Persona que visita")
+                    Width: =If(Screen_Index.Size > 2, Image1_1.Width/2-20, Image1_1.Width-20)
+                    X: =Image1_1.X
+                    Y: =Image1_1.Y+Image1_1.Height
+                    ZIndex: =1
+
+                txtCompania As text:
+                    BorderColor: =RGBA(0, 0, 0, 1)
+                    Clear: =true
+                    Default: =""
+                    Height: =30
+                    HintText: ="Ingresa tu compañía"
+                    Width: =Label8_2.Width
+                    X: =Label8_2.X
+                    Y: =Label8_2.Y+Label8_2.Height
+                    ZIndex: =2
+
+            Container3_2 As groupContainer.verticalAutoLayoutContainer:
+                AlignInContainer: =AlignInContainer.Start
+                Height: =80
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinHeight: =80
+                LayoutMinWidth: =0
+                LayoutMode: =LayoutMode.Auto
+                PaddingLeft: =5
+                Visible: =Radio1_1.Selected.Value<>"Visitante"
+                Width: =Container2_2.Width
+                ZIndex: =2
+
+                Label8_4 As label:
+                    FontWeight: =FontWeight.Bold
+                    Height: =30
+                    LayoutMinHeight: =0
+                    Text: ="Responsable del proyecto KOF"
+                    Width: =If(Screen_Index.Size > 2, Image1_1.Width/2-20, Image1_1.Width-20)
+                    X: =Image1_1.X
+                    Y: =Image1_1.Y+Image1_1.Height
+                    ZIndex: =1
+
+                txtRespProyecto As text:
+                    BorderColor: =RGBA(0, 0, 0, 1)
+                    Clear: =true
+                    Default: =""
+                    Height: =30
+                    HintText: ="Ingresa al responsable del proyecto KOF"
+                    Width: =Label8_4.Width
+                    X: =Label8_4.X
+                    Y: =Label8_4.Y+Label8_4.Height
+                    ZIndex: =2
+
+        Container2_2 As groupContainer.verticalAutoLayoutContainer:
+            FillPortions: =0
+            Height: =If(Screen_Index.Size > 2, 80, 160)
+            LayoutDirection: =If(Screen_Index.Size > 2,LayoutDirection.Horizontal,LayoutDirection.Vertical)
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            Visible: =Radio1_1.Selected.Value<>"Visitante"
+            Width: =Parent.Width/2+Parent.Width/3
+            X: =113
+            Y: =256
+            ZIndex: =8
+
+            Container4_2 As groupContainer.verticalAutoLayoutContainer:
+                AlignInContainer: =AlignInContainer.Start
+                Height: =80
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinHeight: =100
+                LayoutMinWidth: =0
+                LayoutMode: =LayoutMode.Auto
+                PaddingLeft: =5
+                Width: =Container2_2.Width
+                ZIndex: =2
+
+                Label8_5 As label:
+                    FontWeight: =FontWeight.Bold
+                    Height: =30
+                    Text: ="Área asignada"
+                    Width: =If(Screen_Index.Size > 2,Image1_1.Width/2-20, Image1_1.Width-20)
+                    X: =If(Screen_Index.Size > 2,Label8_4.X+Label8_4.Width, Label8_4.X)
+                    Y: =If(Screen_Index.Size > 2, Label8_4.Y, txtRespProyecto.Y+Label8_5.Height)
+                    ZIndex: =1
+
+                txtAreaAsign As text:
+                    BorderColor: =RGBA(0, 0, 0, 1)
+                    Clear: =true
+                    Default: =""
+                    Height: =30
+                    HintText: ="Ingresa tu área asignada"
+                    Width: =Label8_5.Width
+                    X: =Label8_5.X
+                    Y: =Label8_5.Y+Label8_5.Height
+                    ZIndex: =2
+
+        Container2_9 As groupContainer.verticalAutoLayoutContainer:
+            FillPortions: =0
+            Height: =If(Screen_Index.Size > 2, 50, 100)
+            LayoutDirection: =If(Screen_Index.Size > 2,LayoutDirection.Horizontal,LayoutDirection.Vertical)
+            LayoutMinHeight: =100
+            LayoutMinWidth: =0
+            LayoutMode: =LayoutMode.Auto
+            Width: =Parent.Width/2+Parent.Width/3
+            X: =113
+            Y: =256
+            ZIndex: =9
+
+            Radio1_2 As radio:
+                BorderColor: =RGBA(0, 0, 0, 1)
+                Default: ="Con vehículo"
+                FillPortions: =1
+                Height: =If(Screen_Index.Size > 2, 50, 100)
+                HoverColor: =RGBA(0, 0, 0, 1)
+                Items: =["Con vehículo", "Sin vehículo"]
+                Layout: =If(Screen_Index.Size > 2, Layout.Horizontal, Layout.Vertical)
+                LayoutMinWidth: =0
+                PaddingBottom: =0
+                PaddingTop: =0
+                RadioBorderColor: =RGBA(0, 0, 0, 1)
+                Width: =440
+                X: =Image1_1.X
+                Y: =
+                ZIndex: =1
+
+        Container2_3 As groupContainer.verticalAutoLayoutContainer:
+            FillPortions: =0
+            Height: =If(Screen_Index.Size > 2, 80, 160)
+            LayoutDirection: =If(Screen_Index.Size > 2,LayoutDirection.Horizontal,LayoutDirection.Vertical)
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            Visible: =Radio1_2.Selected.Value="Con vehículo"
+            Width: =Parent.Width/2+Parent.Width/3
+            X: =113
+            Y: =256
+            ZIndex: =10
+
+            Container3_3 As groupContainer.verticalAutoLayoutContainer:
+                AlignInContainer: =AlignInContainer.Start
+                Height: =80
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinHeight: =80
+                LayoutMinWidth: =0
+                LayoutMode: =LayoutMode.Auto
+                PaddingLeft: =5
+                Width: =Container2_3.Width
+                ZIndex: =1
+
+                Label8_6 As label:
+                    FontWeight: =FontWeight.Bold
+                    Height: =30
+                    LayoutMinHeight: =0
+                    Text: ="Marca de vehículo"
+                    Width: =If(Screen_Index.Size > 2, Image1_1.Width/2-20, Image1_1.Width-20)
+                    X: =Image1_1.X
+                    Y: =Image1_1.Y+Image1_1.Height
+                    ZIndex: =1
+
+                txtMarcaVehic As text:
+                    BorderColor: =RGBA(0, 0, 0, 1)
+                    Clear: =true
+                    Default: =""
+                    Height: =30
+                    HintText: ="Ingresa la marca del vehículo"
+                    Width: =Label8_6.Width
+                    X: =Label8_6.X
+                    Y: =Label8_6.Y+Label8_6.Height
+                    ZIndex: =2
+
+            Container4_3 As groupContainer.verticalAutoLayoutContainer:
+                AlignInContainer: =AlignInContainer.Start
+                Height: =80
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinHeight: =100
+                LayoutMinWidth: =0
+                LayoutMode: =LayoutMode.Auto
+                PaddingLeft: =5
+                Width: =Container2_3.Width
+                ZIndex: =2
+
+                Label8_7 As label:
+                    FontWeight: =FontWeight.Bold
+                    Height: =30
+                    Text: ="Placas"
+                    Width: =If(Screen_Index.Size > 2,Image1_1.Width/2-20, Image1_1.Width-20)
+                    X: =If(Screen_Index.Size > 2,Label8_6.X+Label8_6.Width, Label8_6.X)
+                    Y: =If(Screen_Index.Size > 2, Label8_6.Y, txtMarcaVehic.Y+Label8_7.Height)
+                    ZIndex: =1
+
+                txtPlacas As text:
+                    BorderColor: =RGBA(0, 0, 0, 1)
+                    Clear: =true
+                    Default: =""
+                    Height: =30
+                    HintText: ="Ingresa las placas del vehículo"
+                    Width: =Label8_7.Width
+                    X: =Label8_7.X
+                    Y: =Label8_7.Y+Label8_7.Height
+                    ZIndex: =2
+
+        Container2_10 As groupContainer.verticalAutoLayoutContainer:
+            FillPortions: =0
+            Height: =If(Screen_Index.Size > 2, 80, 160)
+            LayoutDirection: =If(Screen_Index.Size > 2,LayoutDirection.Horizontal,LayoutDirection.Vertical)
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            Visible: =Radio1_2.Selected.Value="Con vehículo"
+            Width: =Parent.Width/2+Parent.Width/3
+            X: =113
+            Y: =256
+            ZIndex: =11
+
+            Container3_8 As groupContainer.verticalAutoLayoutContainer:
+                AlignInContainer: =AlignInContainer.Start
+                Height: =80
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinHeight: =80
+                LayoutMinWidth: =0
+                LayoutMode: =LayoutMode.Auto
+                PaddingLeft: =5
+                Width: =Container2_10.Width
+                ZIndex: =1
+
+                Label8_9 As label:
+                    FontWeight: =FontWeight.Bold
+                    Height: =30
+                    LayoutMinHeight: =0
+                    Text: ="Modelo de vehículo"
+                    Width: =If(Screen_Index.Size > 2, Image1_1.Width/2-20, Image1_1.Width-20)
+                    X: =Image1_1.X
+                    Y: =Image1_1.Y+Image1_1.Height
+                    ZIndex: =1
+
+                txtModeloVehic As text:
+                    BorderColor: =RGBA(0, 0, 0, 1)
+                    Clear: =true
+                    Default: =""
+                    Height: =30
+                    HintText: ="Ingresa el modelo del vehículo"
+                    Width: =Label8_9.Width
+                    X: =Label8_9.X
+                    Y: =Label8_9.Y+Label8_9.Height
+                    ZIndex: =2
+
+        Container2_7 As groupContainer.verticalAutoLayoutContainer:
+            FillPortions: =0
+            Height: =If(Screen_Index.Size > 2, 80, 160)
+            LayoutDirection: =If(Screen_Index.Size > 2,LayoutDirection.Horizontal,LayoutDirection.Vertical)
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            Visible: =Radio1_1.Selected.Value<>"Visitante"
+            Width: =Parent.Width/2+Parent.Width/3
+            X: =113
+            Y: =256
+            ZIndex: =12
+
+            Container3_5 As groupContainer.verticalAutoLayoutContainer:
+                AlignInContainer: =AlignInContainer.Start
+                Height: =80
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinHeight: =80
+                LayoutMinWidth: =0
+                LayoutMode: =LayoutMode.Auto
+                PaddingLeft: =5
+                Width: =Container2_7.Width
+                ZIndex: =1
+
+                Label8_10 As label:
+                    FontWeight: =FontWeight.Bold
+                    Height: =30
+                    LayoutMinHeight: =0
+                    Text: ="Fecha Inicio"
+                    Width: =If(Screen_Index.Size > 2, Image1_1.Width/2-20, Image1_1.Width-20)
+                    X: =Image1_1.X
+                    Y: =Image1_1.Y+Image1_1.Height
+                    ZIndex: =1
+
+                DatePicker1 As datepicker:
+                    IconBackground: =RGBA(184, 0, 0, 1)
+                    OnChange: =If(Self.SelectedDate<Now(), Reset(Self))
+                    Width: =Label8_10.Width
+                    ZIndex: =2
+
+            Container4_6 As groupContainer.verticalAutoLayoutContainer:
+                AlignInContainer: =AlignInContainer.Start
+                Height: =80
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinHeight: =100
+                LayoutMinWidth: =0
+                LayoutMode: =LayoutMode.Auto
+                PaddingLeft: =5
+                Width: =Container2_7.Width
+                ZIndex: =2
+
+                Label8_11 As label:
+                    FontWeight: =FontWeight.Bold
+                    Height: =30
+                    Text: ="Fecha vencimiento"
+                    Width: =If(Screen_Index.Size > 2,Image1_1.Width/2-20, Image1_1.Width-20)
+                    X: =If(Screen_Index.Size > 2,Label8_10.X+Label8_10.Width, Label8_10.X)
+                    ZIndex: =1
+
+                DatePicker2 As datepicker:
+                    DefaultDate: =DateAdd(DatePicker1.SelectedDate,1,Days)
+                    IconBackground: =RGBA(184, 0, 0, 1)
+                    OnChange: |-
+                        =If(Self.SelectedDate < Now(),
+                            Reset(Self),
+                            If(Self.SelectedDate < DatePicker1.SelectedDate,
+                                Reset(Self)
+                            )
+                        )
+                    Width: =Label8_11.Width
+                    ZIndex: =2
+
+        Container2_4 As groupContainer.verticalAutoLayoutContainer:
+            FillPortions: =0
+            Height: =If(Screen_Index.Size > 2, 80, 160)
+            LayoutDirection: =If(Screen_Index.Size > 2,LayoutDirection.Horizontal,LayoutDirection.Vertical)
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            Width: =Parent.Width/2+Parent.Width/3
+            X: =113
+            Y: =256
+            ZIndex: =13
+
+            Container3_4 As groupContainer.verticalAutoLayoutContainer:
+                AlignInContainer: =AlignInContainer.Start
+                Height: =80
+                LayoutMinHeight: =80
+                LayoutMinWidth: =0
+                LayoutMode: =LayoutMode.Auto
+                Visible: =false
+                Width: =Container2_4.Width
+                ZIndex: =1
+
+                Image5 As image:
+                    FillPortions: =1
+                    Height: =50
+                    Image: =If(varFirma=PenInput1.Image, BotónFirmaAceptada, BotónIngresarFirma)
+                    OnSelect: =Reset(PenInput1);Set(_bandFirma, true);
+                    ZIndex: =1
+
+            Container4_4 As groupContainer.verticalAutoLayoutContainer:
+                AlignInContainer: =AlignInContainer.Start
+                Height: =80
+                LayoutMinHeight: =100
+                LayoutMinWidth: =0
+                LayoutMode: =LayoutMode.Auto
+                Width: =Container2_4.Width
+                ZIndex: =2
+
+                Image5_1 As image:
+                    AlignInContainer: =AlignInContainer.Start
+                    FillPortions: =1
+                    Height: =50
+                    Image: =BotónGuardar
+                    OnSelect: |-
+                        =If(Radio1_1.Selected.Value="Proveedor" || Radio1_1.Selected.Value="Contratista",
+                            If(IsBlank(Trim(txtCorreo.Text)) || IsBlank(Trim(txtNombre.Text)) || IsBlank(Trim(txtCompania.Text)) || IsBlank(Trim(txtRespProyecto.Text)) || IsBlank(Trim(txtAreaAsign.Text)) || IsBlank(Trim(txtUnidadOperativa.Text)),
+                                Notify("Es necesario llenar todos los campos del formulario",NotificationType.Error),
+                                If(Radio1_2.Selected.Value="Con vehículo" && (IsBlank(Trim(txtMarcaVehic.Text)) || IsBlank(Trim(txtPlacas.Text)) || IsBlank(Trim(txtModeloVehic.Text))),
+                                    Notify("Es necesario llenar todos los campos del formulario",NotificationType.Error),
+                                    If(IsBlankOrError(Radio1_1.Selected.Value), 
+                                        Notify("Debes seleccionar la opción de proveedor o contratista",NotificationType.Error),
+                                        //If(varFirma<>PenInput1.Image;
+                                            //Notify("Debes ingresar una firma";NotificationType.Error);
+                                            If(DateDiff(DatePicker1.SelectedDate, DatePicker2.SelectedDate,Months)> 6,
+                                                Notify("la vigencia de tu acceso solamente puede ser por maximo 6 meses",NotificationType.Error),
+                                                Set(_bandIngresaFirma, true);
+                                                Set(varFirma, Blank());
+                                            Set(varFirmaFinal, Blank());
+                                            Reset(PenInput1);
+                                                //Set(_bandRegisAcceso; true)
+                                            )                        
+                                        //)
+                                    )
+                                    
+                                )                
+                            ),
+                            If(IsBlank(Trim(txtCorreo.Text)) || IsBlank(Trim(txtNombre.Text)) || IsBlank(Trim(txtCompania.Text)) || IsBlank(Trim(txtUnidadOperativa.Text)),
+                                Notify("Es necesario llenar todos los campos del formulario",NotificationType.Error),
+                                If(Radio1_2.Selected.Value="Con vehículo" && (IsBlank(Trim(txtMarcaVehic.Text)) || IsBlank(Trim(txtPlacas.Text)) || IsBlank(Trim(txtModeloVehic.Text))),
+                                    Notify("Es necesario llenar todos los campos del formulario",NotificationType.Error),
+                                    If(Radio1_3.Selected.Value="No" && IsBlank(txtEdad.Text),
+                                        Notify("Es necesario llenar todos los campos del formulario",NotificationType.Error),
+                                        If(IsBlankOrError(Radio1_1.Selected.Value), 
+                                            Notify("Debes seleccionar la opción de proveedor o contratista",NotificationType.Error),
+                                            //If(varFirma<>PenInput1.Image;
+                                                //Notify("Debes ingresar una firma";NotificationType.Error);
+                                                If(DateDiff(DatePicker1.SelectedDate, DatePicker2.SelectedDate,Months)> 6,
+                                                    Notify("la vigencia de tu acceso solamente puede ser por maximo 6 meses",NotificationType.Error),
+                                                    Set(_bandIngresaFirma, true);
+                                                    Set(varFirma, Blank());
+                                                    Set(varFirmaFinal, Blank());
+                                                    Reset(PenInput1);
+                                                    //Set(_bandRegisAcceso; true)
+                                                )                        
+                                            //)
+                                        )
+                                    )
+                                )                
+                            )
+                        )
+                        ///&& (IsBlank(Trim(txtMarcaVehic.Text)) || IsBlank(Trim(txtPlacas.Text)))
+                    ZIndex: =1
+
+    Label10 As label:
+        Text: ="30"
+        Visible: =false
+        X: =40
+        Y: =40
+        ZIndex: =12
+
+    Button9 As button:
+        OnSelect: |-
+            =//Set(_bandIngresaFirma; true)
+            Set(_bandRegisAcceso, true)
+        Text: ="Botón"
+        ZIndex: =18
+
+    Group11 As group:
+        Height: =5
+        Width: =5
+        X: =60
+        Y: =60
+        ZIndex: =18
+
+        Image7_1 As image:
+            Height: |-
+                =If(Screen_Index.Size > 2, 50
+                , 40)
+            Image: =BotónHome
+            Width: =If(Screen_Index.Size > 2, 50, 40)
+            X: =Parent.Width-Self.Width-10
+            Y: =(Image1_1.Y+Image1_1.Height/2)-Self.Width/2
+            ZIndex: =1
+
+        Icon1 As icon.Cancel:
+            Color: =RGBA(0, 0, 0, 0)
+            Height: =Image7_1.Height
+            Icon: =Icon.Cancel
+            OnSelect: =Navigate(Screen_Index,ScreenTransition.Cover)
+            Width: =Image7_1.Width
+            X: =Image7_1.X
+            Y: =Image7_1.Y
+            ZIndex: =2
+
+    Button7_15 As button:
+        Fill: =RGBA(184, 0, 0, 1)
+        HoverFill: =ColorFade(Self.Fill, -20%)
+        OnSelect: =Set(_bandIngresaFirma, false);
+        RadiusBottomLeft: =100
+        RadiusBottomRight: =100
+        RadiusTopLeft: =100
+        RadiusTopRight: =100
+        Text: ="Cancelar"
+        Visible: =_bandIngresaFirma
+        X: =Parent.Width/2-Self.Width/2
+        Y: =Button7_2.Y+Button7_2.Height+20
+        ZIndex: =19
+
+    Image5_2 As image:
+        Height: =50
+        Image: =If(varFirma=PenInput1.Image, BotónFirmaAceptada, BotónIngresarFirma)
+        OnSelect: =Reset(PenInput1);Set(_bandFirma, true);Set(_bandIngresaFirma, false);
+        Visible: =_bandIngresaFirma
+        Width: =Label9_1.Width
+        X: =Label9_1.X
+        Y: =Label9_1.Y+Label9_1.Height*2
+        ZIndex: =20
+
+    Group1 As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =24
+
+        Rectangle1 As rectangle:
+            Fill: =RGBA(237, 125, 49, 0.57)
+            Height: =Parent.Height
+            Visible: =_bandFirma
+            Width: =Parent.Width
+            ZIndex: =7
+
+        Label4 As label:
+            Align: =Align.Center
+            Color: =RGBA(255, 255, 255, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =90
+            Size: =If(Screen_Index.Size > 2, 30, 15)
+            Text: ="Firma en el recuadro blanco"
+            Visible: =_bandFirma
+            Width: =Parent.Width
+            Y: =PenInput1.Y-Label4.Height
+            ZIndex: =8
+
+        PenInput1 As inkControl:
+            Fill: =RGBA(255, 255, 255, 1)
+            OnSelect: =Set(varFirma, Self.Image);
+            Reset: =true
+            Visible: =_bandFirma
+            Width: =If(Screen_Index.Size > 2, Parent.Width/2, Parent.Width-10)
+            X: =Parent.Width/2-PenInput1.Width/2
+            Y: =Parent.Height/2-PenInput1.Height/2
+            ZIndex: =9
+
+        Image6 As image:
+            Height: =50
+            Image: =BotónAceptar
+            OnSelect: |-
+                =If(varFirma=PenInput1.Image,
+                    Set(_bandRegisAcceso, true);
+                    Set(_bandIngresaFirma, false);
+                    Set(varFirmaFinal, JSON(varFirma,JSONFormat.IncludeBinaryData));
+                    Set(_bandFirma, false),
+                    Set(_bandRegisAcceso, false);
+                    Set(_bandFirma, false);
+                    Set(_bandIngresaFirma, true);
+                    Set(varFirmaFinal, Blank());
+                )
+            Visible: =_bandFirma
+            Width: =50
+            X: =PenInput1.X+PenInput1.Width-Image6.Width*2-20
+            Y: =PenInput1.Y+PenInput1.Height+10
+            ZIndex: =10
+
+        Image6_1 As image:
+            Height: =50
+            Image: =BotónCancelar
+            OnSelect: =Reset(PenInput1);Set(_bandFirma, false);
+            Visible: =_bandFirma
+            Width: =50
+            X: =PenInput1.X+PenInput1.Width-Image6_1.Width
+            Y: =PenInput1.Y+PenInput1.Height+10
+            ZIndex: =11
+
+    Group9 As group:
+        Height: =5
+        Width: =5
+        X: =60
+        Y: =60
+        ZIndex: =34
+
+        Rectangle3_1 As rectangle:
+            Fill: =RGBA(255, 255, 255, 0.76)
+            Height: =Parent.Height
+            Visible: =_bandRegisAcceso || _bandIngresaFirma
+            Width: =Parent.Width
+            ZIndex: =13
+
+        Rectangle4_1 As rectangle:
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =300
+            Visible: =_bandRegisAcceso || _bandIngresaFirma
+            Width: =If(Screen_Registro_Herra_Equip.Size > 2, Parent.Width/3, Parent.Width-20)
+            X: =Parent.Width/2-Self.Width/2
+            Y: =Parent.Height/2-Self.Height/2
+            ZIndex: =14
+
+        Label9_1 As label:
+            Align: =Align.Center
+            FontWeight: =FontWeight.Bold
+            Text: =If(_bandIngresaFirma, "Ingresa tu firma", "¿Estás seguro de registrar esta información?")
+            Visible: =_bandRegisAcceso || _bandIngresaFirma
+            Width: =Rectangle4_1.Width
+            X: =Rectangle4_1.X
+            Y: =Rectangle4_1.Y
+            ZIndex: =15
+
+        Button7_2 As button:
+            Fill: =RGBA(54, 176, 75, 1)
+            HoverFill: =ColorFade(Self.Fill, -20%)
+            OnSelect: |+
+                =If(Radio1_1.Selected.Value="Proveedor" || Radio1_1.Selected.Value="Contratista",
+                    ClearCollect(colDatosRegistro, 
+                        { 
+                            Title: "P-",
+                            UnidadOperativa: txtUnidadOperativa.Text,
+                            Nombre: Trim(txtNombre.Text),
+                            Correo: Trim(txtCorreo.Text),
+                            TipoUsuario: Radio1_1.Selected.Value,
+                            Compania: Trim(txtCompania.Text),
+                            ResponsableProyecto: Trim(txtRespProyecto.Text),
+                            Fecha: Text(Now(), "dd-mm-yyyy"),
+                            AreaAsignada: Trim(txtAreaAsign.Text),
+                            MarcaVehiculo: If(Radio1_2.Selected.Value="Con vehículo", Trim(txtMarcaVehic.Text), "Sin vehículo"),
+                            Placas: If(Radio1_2.Selected.Value="Con vehículo", Trim(txtPlacas.Text), "Sin vehículo"),
+                            Firma: varFirmaFinal,
+                            FechaInicio: Text(DatePicker1.SelectedDate, "dd-mm-yyyy"),
+                            FechaFin: Text(DatePicker2.SelectedDate, "dd-mm-yyyy"),
+                            KeyAcceso: Text(Round((Rand()*10000000),0)),
+                            Vehiculo: Radio1_2.Selected.Value,
+                            ModeloVehiculo: If(Radio1_2.Selected.Value="Con vehículo", Trim(txtModeloVehic.Text), "Sin vehículo"),
+                            Sexo: Cbsexo.Selected.Value,
+                            Edad: If(Radio1_3.Selected.Value="No", Value(txtEdad.Text), 0),
+                            Adulto: If(Radio1_3.Selected.Value="No", false, true)
+                        }
+                    );
+                    Set(varDatosGuardados, Patch(RegIngreProvContr, Defaults(RegIngreProvContr), First(colDatosRegistro)));
+                    UpdateIf(RegIngreProvContr, ID=varDatosGuardados.ID, { Title: "P-"&varDatosGuardados.ID});
+                    Set(_bandRegisAcceso, false);
+                    Navigate(Screen_Confirm_Registro_Acceso,ScreenTransition.Cover)
+                    ,
+                    ClearCollect(colDatosRegistroVisita, 
+                        { 
+                            Title: "V-",
+                            UnidadOperativa: txtUnidadOperativa.Text,
+                            Nombre: Trim(txtNombre.Text),
+                            Correo: Trim(txtCorreo.Text),
+                            PersonaVisita: Trim(txtCompania.Text),            
+                            Fecha: Text(Now(), "dd-mm-yyyy"),
+                            FechaInicio: Text(Now(), "dd-mm-yyyy"),
+                            FechaFin: Text(Now(), "dd-mm-yyyy"),
+                            MarcaVehiculo: If(Radio1_2.Selected.Value="Con vehículo", Trim(txtMarcaVehic.Text), "Sin vehículo"),
+                            Placas: If(Radio1_2.Selected.Value="Con vehículo", Trim(txtPlacas.Text), "Sin vehículo"),
+                            Vehiculo: Radio1_2.Selected.Value,
+                            Firma: varFirmaFinal,
+                            KeyAcceso: Text(Round((Rand()*10000000),0)),
+                            ModeloVehiculo: If(Radio1_2.Selected.Value="Con vehículo", Trim(txtModeloVehic.Text), "Sin vehículo"),
+                            Sexo: Cbsexo.Selected.Value,
+                            Edad: If(Radio1_3.Selected.Value="No", Value(txtEdad.Text), 0),
+                            Adulto: If(Radio1_3.Selected.Value="No", false, true)
+                        }
+                    );
+                    Set(varDatosGuardadosVisita, Patch(RegIngreVisitas, Defaults(RegIngreVisitas), First(colDatosRegistroVisita)));
+                    UpdateIf(RegIngreVisitas, ID=varDatosGuardadosVisita.ID, { Title: "V-"&varDatosGuardadosVisita.ID});
+                    Set(_bandRegisAcceso, false);
+                    Navigate(Screen_Confirm_Registro_Visita,ScreenTransition.Cover)
+                );
+                
+            RadiusBottomLeft: =100
+            RadiusBottomRight: =100
+            RadiusTopLeft: =100
+            RadiusTopRight: =100
+            Text: ="Registrar"
+            Visible: =_bandRegisAcceso
+            X: =Parent.Width/2-Self.Width/2
+            Y: =(Rectangle4_1.Y+Rectangle4_1.Height/2)-Self.Height/2
+            ZIndex: =16
+
+        Button7_3 As button:
+            Fill: =RGBA(184, 0, 0, 1)
+            HoverFill: =ColorFade(Self.Fill, -20%)
+            OnSelect: =Set(_bandRegisAcceso, false);
+            RadiusBottomLeft: =100
+            RadiusBottomRight: =100
+            RadiusTopLeft: =100
+            RadiusTopRight: =100
+            Text: ="Cancelar"
+            Visible: =_bandRegisAcceso
+            X: =Parent.Width/2-Self.Width/2
+            Y: =Button7_2.Y+Button7_2.Height+20
+            ZIndex: =17
+

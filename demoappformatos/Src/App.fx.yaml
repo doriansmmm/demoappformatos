@@ -1,0 +1,7 @@
+App As appinfo:
+    BackEnabled: =false
+    OnStart: |-
+        =Refresh(RegIngreProvContr);
+        ClearCollect(colRegIngreProvContr, RegIngreProvContr);
+    StartScreen: =
+

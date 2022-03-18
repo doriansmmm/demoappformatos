@@ -1,0 +1,96 @@
+{
+  "23252811-fd2e-4b80-9ea7-87b05d581bdc": {
+    "connectionInstanceId": "/providers/microsoft.powerapps/apis/shared_office365users/connections/870812befa1b48a69181ce9b8433b756",
+    "connectionParameters": {
+      "sku": "Enterprise"
+    },
+    "connectionRef": {
+      "apiTier": "Standard",
+      "displayName": "Usuarios de Office 365",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1528/1.0.1528.2589/office365users/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_office365users",
+      "parameterHints": {},
+      "parameterHintsV2": {}
+    },
+    "datasets": {},
+    "dataSources": [
+      "UsuariosdeOffice365"
+    ],
+    "dependencies": {},
+    "dependents": [],
+    "id": "23252811-fd2e-4b80-9ea7-87b05d581bdc"
+  },
+  "277671c3-897c-4c06-bcb9-dafaf2c75d35": {
+    "connectionInstanceId": "/providers/microsoft.powerapps/apis/shared_sharepointonline/connections/8dbc2353230b4b41b618e7c26548eaab",
+    "connectionParameters": {
+      "sku": "Enterprise"
+    },
+    "connectionRef": {
+      "apiTier": "Standard",
+      "displayName": "SharePoint",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1533/1.0.1533.2600/sharepointonline/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_sharepointonline",
+      "parameterHints": {},
+      "parameterHintsV2": {}
+    },
+    "datasets": {
+      "https://cocacolafemsa.sharepoint.com/sites/FORMATOSKOFV2": {
+        "dataSources": {
+          "DescIndividuos": {
+            "tableName": "d91d602b-f9fe-4119-8ac0-0e8874a465fa"
+          },
+          "HerraEquipo": {
+            "tableName": "e2ef43a1-7099-4eb1-8ef9-f19a061d5b7b"
+          },
+          "HerraEquipoVisit": {
+            "tableName": "c9ef8724-86c6-4162-96dd-ad025eb09f02"
+          },
+          "RegIngreHerraEquipo": {
+            "tableName": "f2927c26-bb06-4985-9f39-1c14e34bd5a5"
+          },
+          "RegIngreHerraEquipoVisit": {
+            "tableName": "226cfbfa-364a-4559-8840-739c6757cb89"
+          },
+          "RegIngreProvContr": {
+            "tableName": "c8debdd5-8cab-4dd0-b92b-0674ac9a5b09"
+          },
+          "RegIngreVisitas": {
+            "tableName": "737ff15f-be49-4ae1-ac6e-d38d2730776e"
+          },
+          "ReporteRobos": {
+            "tableName": "9de1d633-68f1-4d41-8ee4-1e0ceee9adf8"
+          },
+          "Testimonios": {
+            "tableName": "2b0c9e77-16df-48f9-a2ff-85e55c68cf6c"
+          }
+        }
+      },
+      "https://sifragc.sharepoint.com/sites/KOF": {
+        "dataSources": {
+          "RegArticulos": {
+            "tableName": "6e1f71c6-2581-498e-9179-27ab2d6884b4"
+          },
+          "RegiSalidaProdMat": {
+            "tableName": "eded1139-19f8-4773-8118-fdbbc150f6b1"
+          }
+        }
+      }
+    },
+    "dataSources": [
+      "RegIngreProvContr",
+      "HerraEquipo",
+      "RegIngreHerraEquipo",
+      "RegIngreVisitas",
+      "RegIngreHerraEquipoVisit",
+      "HerraEquipoVisit",
+      "ReporteRobos",
+      "Testimonios",
+      "DescIndividuos",
+      "RegiSalidaProdMat",
+      "RegArticulos"
+    ],
+    "dependencies": {},
+    "dependents": [],
+    "id": "277671c3-897c-4c06-bcb9-dafaf2c75d35"
+  }
+}
